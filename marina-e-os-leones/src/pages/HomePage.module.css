@@ -32,12 +32,10 @@
    HeroHome não tem padding próprio (ver HeroHome.module.css): o container é
    responsabilidade da página.
 
-   No desktop a coluna da direita do hero é feita para sangrar até a borda do
-   viewport — por isso o padding-right cai a 0 e o padding-left passa a alinhar
-   o texto com o conteúdo das outras seções. O alinhamento usa
-   `max(44px, calc((100% - 1280px) / 2 + 44px))` e NÃO `100vw`: `vw` inclui a
-   largura da barra de rolagem clássica (Windows/Linux) e criaria scroll
-   horizontal de alguns pixels. */
+   No desktop o hero fica dentro da MESMA caixa centralizada das outras seções
+   (--container-max). A foto vai até a borda dessa caixa, não até a borda do
+   viewport: o recuo lateral do texto mora em `.copy` (HeroHome.module.css),
+   para a coluna da direita poder encostar na borda. */
 .heroSection {
   max-width: var(--container-max);
   margin: 0 auto;
@@ -46,9 +44,7 @@
 
 @media (min-width: 1024px) {
   .heroSection {
-    max-width: none;
-    padding: var(--space-10) 0 0
-      max(var(--space-section-x), calc((100% - var(--container-max)) / 2 + var(--space-section-x)));
+    padding: var(--space-10) 0 0;
   }
 }
 

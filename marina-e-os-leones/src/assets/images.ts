@@ -138,30 +138,30 @@ export const images = {
     alt: 'Marina & Os Leones tocando durante o Ensaio Aberto #1',
   },
 
-  /** Reels do Instagram (página 4 · Vídeos). */
-  reelEnsaioEstudio: {
+  /** Reels do Instagram (página 4 · Vídeos): capa real de cada post. */
+  reelHoldingYouClose: {
     src: reel1_800,
-    width: 639,
-    height: 820,
-    alt: 'Ensaio aberto no estúdio',
+    width: 640,
+    height: 1136,
+    alt: 'Marina & Os Leones tocando em Igarapé-Açu',
   },
-  reelBackstage: {
+  reelPalpite: {
     src: reel2_800,
     width: 640,
-    height: 820,
-    alt: 'Backstage do show',
+    height: 1136,
+    alt: 'Marina & Os Leones em Manaus',
   },
-  reelSessaoMata: {
+  reelJahCode: {
     src: reel3_800,
     width: 640,
-    height: 818,
-    alt: 'Sessão na mata',
+    height: 1136,
+    alt: 'Marina & Os Leones na versão reggae de Paramore',
   },
-  reelTeatroAmazonas: {
+  reelDoIWannaKnow: {
     src: reel4_800,
-    width: 641,
-    height: 818,
-    alt: 'Apresentação no Teatro Amazonas',
+    width: 640,
+    height: 1136,
+    alt: 'Marina & Os Leones na versão reggae de Arctic Monkeys',
   },
 
   /** Imagem grande da página "Sobre". */

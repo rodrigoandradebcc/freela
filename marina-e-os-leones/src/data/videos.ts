@@ -40,28 +40,28 @@ export const featuredVideo: FeaturedVideoData & { youtubeId: string; start?: num
 /** Página 4 · Vídeos — grade de Reels do Instagram. */
 export const reels: ReelData[] = [
   {
-    id: 'ensaio-aberto-estudio',
-    title: 'Ensaio aberto no estúdio',
+    id: 'holding-you-close',
+    title: 'Holding You Close · Igarapé-Açu',
     url: 'https://www.instagram.com/p/DbZMbnfJJLT/',
-    imageKey: 'reelEnsaioEstudio',
+    imageKey: 'reelHoldingYouClose',
   },
   {
-    id: 'backstage-do-show',
-    title: 'Backstage do show',
+    id: 'palpite',
+    title: 'Palpite · Manaus',
     url: 'https://www.instagram.com/p/DWHtSZACZhV/',
-    imageKey: 'reelBackstage',
+    imageKey: 'reelPalpite',
   },
   {
-    id: 'sessao-na-mata',
-    title: 'Sessão na mata',
+    id: 'jah-code',
+    title: 'JAH-Code · Paramore em reggae',
     url: 'https://www.instagram.com/p/DWcYZhdiTC1/',
-    imageKey: 'reelSessaoMata',
+    imageKey: 'reelJahCode',
   },
   {
-    id: 'teatro-amazonas',
-    title: 'Teatro Amazonas',
+    id: 'do-i-wanna-know',
+    title: 'Do I Wanna Know? · Arctic Monkeys',
     url: 'https://www.instagram.com/p/DP42-XiDQvK/',
-    imageKey: 'reelTeatroAmazonas',
+    imageKey: 'reelDoIWannaKnow',
   },
 ];
 

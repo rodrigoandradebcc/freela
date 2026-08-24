@@ -59,10 +59,10 @@ export function HeroHome(): JSX.Element {
         <p className={styles.paragraph}>{HERO.paragraph}</p>
 
         <div className={styles.actions}>
-          <Button variant="dark" as="link" to="/agenda">
+          <Button variant="dark" size="lg" as="link" to="/agenda">
             VER AGENDA
           </Button>
-          <Button variant="outline" as="link" to="/musica" icon={<PlayIcon />}>
+          <Button variant="outline" size="lg" as="link" to="/musica" icon={<PlayIcon />}>
             OUVIR
           </Button>
         </div>

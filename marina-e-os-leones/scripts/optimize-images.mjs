@@ -78,11 +78,13 @@ const JOBS = [
   { source: 'show-guitarra.png', base: 'show-guitarra', kind: 'card' },
   { source: 'member1.png', base: 'member1', kind: 'card' },
 
-  // Reels do Instagram (página 4 · Vídeos).
-  { source: 'reel1.png', base: 'reel1', kind: 'card' },
-  { source: 'reel2.png', base: 'reel2', kind: 'card' },
-  { source: 'reel3.png', base: 'reel3', kind: 'card' },
-  { source: 'reel4.png', base: 'reel4', kind: 'card' },
+  // Reels do Instagram (página 4 · Vídeos). NÃO são os reelN.png do design
+  // (aqueles são placeholders): a origem é a capa real de cada post, salva de
+  // `instagram.com/p/CODIGO/embed/`. Ver `reels` em src/data/videos.ts.
+  { source: 'reel1.jpg', base: 'reel1', kind: 'card' },
+  { source: 'reel2.jpg', base: 'reel2', kind: 'card' },
+  { source: 'reel3.jpg', base: 'reel3', kind: 'card' },
+  { source: 'reel4.jpg', base: 'reel4', kind: 'card' },
 
   // show-marina2 é reaproveitada como foto de integrante (card menor)
   {

@@ -19,6 +19,7 @@
   .copy {
     align-self: center;
     padding-right: 30px;
+    padding-left: var(--space-section-x);
   }
 }
 
@@ -62,17 +63,15 @@
 }
 
 .stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-4);
-  margin-top: var(--space-8);
-  padding-top: var(--space-6);
-  border-top: 1px solid rgba(32, 30, 29, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  margin-top: 36px;
 }
 
 @media (min-width: 768px) {
   .stats {
-    gap: var(--space-8);
+    gap: 30px;
   }
 }
 
