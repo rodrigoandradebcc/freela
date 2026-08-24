@@ -3,10 +3,16 @@
  *   'quick' → bloco curto da Home (nome, evento, WhatsApp)
  *   'full'  → página Mídia kit (nome, empresa, evento, WhatsApp ou e-mail)
  *
- * NÃO HÁ BACK-END. Nada é enviado a lugar nenhum: o submit só troca o estado
- * local para 'sent' e mostra os canais reais de contato. A mensagem de
- * confirmação deixa isso explícito em vez de fingir um envio — e por não haver
- * requisição não existe estado de "Enviando…" (seria loading falso).
+ * NÃO HÁ BACK-END, e continua não havendo: o submit monta uma mensagem com o
+ * que foi preenchido e abre o WhatsApp da produção (`CONTACT.whatsapp`) via
+ * link `wa.me` já com o texto pronto. Quem envia é a pessoa, do próprio
+ * aparelho — por isso não existe estado de "Enviando…" nem tratamento de erro
+ * de rede: nenhuma requisição sai daqui.
+ *
+ * O `window.open` acontece DENTRO do handler de submit, ou seja, no gesto do
+ * usuário — é o que impede o bloqueador de pop-up de barrar a aba. Mesmo
+ * assim a confirmação repete o link: se a aba for bloqueada, ainda dá para
+ * clicar (ver `statusRegion`).
  *
  * Acessibilidade: todo campo tem <label> VISÍVEL associado por htmlFor/id
  * (placeholder não é rótulo); a confirmação é role="status" + aria-live="polite".
@@ -72,19 +78,54 @@ const FULL_FIELDS: readonly FieldConfig[] = [
   },
 ];
 
+/**
+ * Monta o texto da mensagem: uma saudação e, embaixo, "Rótulo: valor" para cada
+ * campo PREENCHIDO. Campos opcionais deixados em branco simplesmente não
+ * entram — mandar "Empresa: (vazio)" só polui a conversa.
+ *
+ * Os rótulos vêm da mesma `FieldConfig` que desenha o formulário, então mudar o
+ * texto de um campo muda a mensagem junto, sem uma segunda lista para manter.
+ */
+function buildWhatsappMessage(
+  fields: readonly FieldConfig[],
+  values: Record<string, string>,
+  variant: ContactFormVariant,
+): string {
+  const greeting =
+    variant === 'quick'
+      ? `Olá, ${CONTACT.whatsappContact}! Quero pedir uma proposta da Marina & Os Leones.`
+      : `Olá, ${CONTACT.whatsappContact}! Vim pelo mídia kit e quero falar com a produção da Marina & Os Leones.`;
+
+  const lines = fields
+    .map((field) => [field.label, (values[field.name] ?? '').trim()] as const)
+    .filter(([, value]) => value !== '')
+    .map(([label, value]) => `${label}: ${value}`);
+
+  return [greeting, '', ...lines].join('\n');
+}
+
+/** Link wa.me com a mensagem já embutida. `encodeURIComponent` preserva as quebras de linha. */
+function buildWhatsappUrl(message: string): string {
+  return `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(message)}`;
+}
+
 export function ContactForm({ variant }: ContactFormProps): JSX.Element {
   const fields = variant === 'quick' ? QUICK_FIELDS : FULL_FIELDS;
 
   // Prefixo único: as duas variantes podem coexistir na mesma página.
   const idPrefix = useId();
   const [values, setValues] = useState<Record<string, string>>({});
-  const [status, setStatus] = useState<'idle' | 'sent'>('idle');
+  // Guarda a URL usada no submit para poder reoferecê-la se o pop-up for barrado.
+  const [sentUrl, setSentUrl] = useState<string | null>(null);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     // A validação de `required` fica com o HTML5: o browser bloqueia o submit
     // antes daqui e mostra a mensagem nativa, já traduzida e acessível.
     event.preventDefault();
-    setStatus('sent');
+
+    const url = buildWhatsappUrl(buildWhatsappMessage(fields, values, variant));
+    setSentUrl(url);
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -122,12 +163,16 @@ export function ContactForm({ variant }: ContactFormProps): JSX.Element {
           quando o texto aparecer — regiões criadas junto com o conteúdo às
           vezes não são anunciadas. */}
       <div className={styles.statusRegion} role="status" aria-live="polite">
-        {status === 'sent' ? (
+        {sentUrl ? (
           <p className={styles.statusMessage}>
-            Anotado! Este formulário ainda não envia mensagens automaticamente — para falar com a
-            produção agora, chame no WhatsApp{' '}
-            <a className={styles.statusLink} href={`tel:+55${CONTACT.phone.replace(/\D/g, '')}`}>
-              {CONTACT.phone}
+            Abrimos o WhatsApp da produção com a sua mensagem pronta: é só enviar. Não abriu?{' '}
+            <a
+              className={styles.statusLink}
+              href={sentUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Falar no WhatsApp {CONTACT.phone}
             </a>{' '}
             ou escreva para{' '}
             <a className={styles.statusLink} href={`mailto:${CONTACT.email}`}>

@@ -78,7 +78,7 @@ export default function SobrePage(): JSX.Element {
           </ul>
 
           <p className={styles.membersNote}>
-            Fotos ao vivo no Bosque Shopping (13.09.2025). Nomes e instrumentos supostos — em
+            Fotos ao vivo no Bosque Shopping (13.09.2025). Nomes e instrumentos supostos; em
             atualização conforme a formação oficial.
           </p>
         </div>

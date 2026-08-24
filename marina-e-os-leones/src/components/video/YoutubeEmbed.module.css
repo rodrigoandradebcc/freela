@@ -15,3 +15,55 @@
   height: 100%;
   border: 0;
 }
+
+/* --- capa (antes do clique) ------------------------------------------------ */
+
+/* A capa do YouTube vem em 16:9 com barras pretas quando a fonte é vertical;
+   `object-fit: cover` corta essas barras em vez de exibi-las. */
+.poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Botão de play centralizado sobre a capa. A área clicável é a CAPA INTEIRA
+   (o `::after` esticado), não só o disco — o disco é o alvo visual. */
+.play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-accent);
+  color: var(--color-text-on-dark);
+  transform: translate(-50%, -50%);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+.play::after {
+  content: '';
+  position: absolute;
+  inset: -50vmax;
+}
+
+.play:hover {
+  background-color: var(--color-accent-hover);
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .play,
+  .play:hover {
+    transform: translate(-50%, -50%);
+    transition: background-color var(--duration-fast) var(--ease-out);
+  }
+}

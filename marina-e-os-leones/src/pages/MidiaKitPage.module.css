@@ -3,7 +3,7 @@
    MOBILE-FIRST (convenção do projeto): a base é sempre uma coluna só; as
    grades entram por `min-width`, nunca por `max-width`.
 
-   CONTAINER: `.section` centra o conteúdo em 1200px (mesma medida do Header e
+   CONTAINER: `.section` centra o conteúdo em 1280px (mesma medida do Header e
    do Footer) e aplica o padding horizontal padrão — 20px na base, 44px a
    partir de 1024px. O espaçamento vertical entre seções é o `margin-bottom`
    dele, para não somar margens divergentes seção a seção.
@@ -17,7 +17,7 @@
 }
 
 .section {
-  max-width: 1200px;
+  max-width: var(--container-max);
   margin: 0 auto 48px;
   padding: 0 20px;
 }

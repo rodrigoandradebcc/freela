@@ -2,7 +2,7 @@
 
    Mobile-first, seguindo a convenção do projeto: base = mobile, breakpoints só
    em `min-width`. Padding horizontal de seção: 20px na base, 44px a partir de
-   1024px; o conteúdo é centralizado por um `.sectionInner` de 1200px, mesma
+   1024px; o conteúdo é centralizado por um `.sectionInner` de 1280px, mesma
    medida do Header e do Footer. */
 
 .page {
@@ -15,10 +15,10 @@
 
 /* O padding horizontal mora AQUI (mesmo elemento que centraliza), nunca nos
    wrappers `.members`/`.trajectory` por fora — colocá-lo no wrapper externo
-   recentraliza a caixa de 1200px numa área já estreitada por ele, e o
+   recentraliza a caixa de 1280px numa área já estreitada por ele, e o
    conteúdo fica 44px mais à esquerda do que o Header/Footer e o hero. */
 .sectionInner {
-  max-width: 1200px;
+  max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -53,7 +53,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
-  max-width: 1200px;
+  max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 20px;
 }

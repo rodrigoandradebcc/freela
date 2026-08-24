@@ -40,3 +40,10 @@ export const resources: Resource[] = [
 
 /** Rótulo do botão principal de download no hero da tela 6. */
 export const MEDIA_KIT_DOWNLOAD_LABEL = 'MÍDIA KIT COMPLETO · 24 MB';
+
+/**
+ * Rótulo do mesmo download na prévia da Home. O design usa uma frase mais
+ * curta e imperativa aqui (o botão divide espaço com outros dois) — por isso
+ * são duas constantes e não uma reaproveitada.
+ */
+export const MEDIA_KIT_HOME_CTA_LABEL = 'BAIXAR MÍDIA KIT (24 MB)';

@@ -1,4 +1,6 @@
-import type { JSX } from 'react';
+import { useState, type JSX } from 'react';
+
+import { PlayIcon } from '@/components/icons';
 
 import styles from './YoutubeEmbed.module.css';
 
@@ -13,24 +15,28 @@ export interface YoutubeEmbedProps {
 }
 
 /**
- * Embed responsivo (16:9) do player do YouTube, com autoplay.
+ * Embed responsivo (16:9) do player do YouTube, em duas etapas ("facade").
  *
- * Autoplay COM SOM é bloqueado por todo navegador moderno — só é permitido
- * mudo. Por isso `mute=1` é obrigatório aqui: sem ele o autoplay simplesmente
- * não dispara em Chrome/Safari/Firefox. O próprio player do YouTube mostra o
- * botão de "ativar som" para quem quiser ouvir.
+ * POR QUE NÃO AUTOPLAY
+ * --------------------
+ * Autoplay COM SOM é bloqueado por todo navegador moderno: só toca sozinho se
+ * for mudo. Como o vídeo começando mudo não serve, aqui a página mostra
+ * primeiro a CAPA do vídeo e só monta o iframe no clique. Esse clique é um
+ * gesto do usuário, então o `autoplay=1` que vai no `src` roda COM SOM — sem
+ * `mute`, sem botão de "ativar som" do YouTube.
  *
- * `loading="lazy"` faz o iframe (e portanto o autoplay) só iniciar quando o
- * elemento entra na viewport — é o que faz "tocar na hora que aparece" valer
- * tanto para quem carrega a página já na seção quanto para quem rola até ela.
+ * De quebra o player do YouTube (várias centenas de KB) não é baixado por quem
+ * nunca clica: até lá a seção é uma imagem e um botão.
  *
  * `youtube-nocookie.com` (modo de privacidade avançada) evita cookies de
- * rastreamento antes de qualquer interação do usuário com o player.
+ * rastreamento antes de qualquer interação do usuário com o player. A capa vem
+ * de `i.ytimg.com`, que serve imagem estática e não grava cookie.
  */
 export function YoutubeEmbed({ videoId, title, start, className }: YoutubeEmbedProps): JSX.Element {
+  const [playing, setPlaying] = useState(false);
+
   const params = new URLSearchParams({
     autoplay: '1',
-    mute: '1',
     rel: '0',
     modestbranding: '1',
     playsinline: '1',
@@ -39,13 +45,41 @@ export function YoutubeEmbed({ videoId, title, start, className }: YoutubeEmbedP
     params.set('start', String(start));
   }
 
+  const classes = [styles.wrapper, className].filter(Boolean).join(' ');
+
+  if (!playing) {
+    return (
+      <div className={classes}>
+        {/* `maxresdefault` não existe para todo vídeo; o `onError` cai no
+            `hqdefault`, que o YouTube gera para todos. */}
+        <img
+          className={styles.poster}
+          src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
+          alt=""
+          loading="lazy"
+          onError={(event) => {
+            event.currentTarget.src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+          }}
+        />
+
+        <button
+          type="button"
+          className={styles.play}
+          aria-label={`Assistir: ${title}`}
+          onClick={() => setPlaying(true)}
+        >
+          <PlayIcon size={30} />
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <div className={[styles.wrapper, className].filter(Boolean).join(' ')}>
+    <div className={classes}>
       <iframe
         className={styles.iframe}
         src={`https://www.youtube-nocookie.com/embed/${videoId}?${params.toString()}`}
         title={title}
-        loading="lazy"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen
       />

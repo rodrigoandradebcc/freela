@@ -11,13 +11,20 @@
  * separar em `TrackRow.tsx` só espalharia o componente em dois arquivos que
  * sempre mudam juntos.
  *
- * Acessibilidade: cada linha é um `<button type="button">` de largura total,
- * nunca um `<div onClick>` — assim ganha foco, Enter/Espaço e papel correto de
- * graça. A linha da faixa tocando leva `aria-current="true"`.
+ * Acessibilidade: selecionar a faixa é um `<button type="button">`, nunca um
+ * `<div onClick>` — assim ganha foco, Enter/Espaço e papel correto de graça. A
+ * linha da faixa tocando leva `aria-current="true"`.
+ *
+ * A linha tem DOIS destinos (tocar no player daqui / abrir a faixa no Spotify),
+ * então não pode ser um único elemento clicável: o botão e o link são irmãos
+ * dentro de `.row` (link dentro de botão é HTML inválido). O botão continua
+ * cobrindo a linha inteira por um `::after` esticado, e o link do Spotify fica
+ * acima dele — ver `.select::after` / `.spotify` no CSS.
  */
 
 import type { JSX } from 'react';
 
+import { ExternalLinkIcon } from '@/components/icons';
 import { tracks } from '@/data/tracks';
 import type { Track } from '@/types';
 import { usePlayer } from '@/player/PlayerContext';
@@ -44,17 +51,29 @@ function TrackRow({ track, index, isActive, dense, onSelect }: TrackRowProps): J
     .join(' ');
 
   return (
-    <button
-      type="button"
-      className={classes}
-      aria-current={isActive ? 'true' : undefined}
-      onClick={() => onSelect(index)}
-    >
-      <span className={styles.number}>{String(index + 1).padStart(2, '0')}</span>
-      <span className={styles.title}>{track.title}</span>
-      <span className={styles.style}>{track.style}</span>
-      <span className={styles.duration}>{track.durationLabel}</span>
-    </button>
+    <div className={classes}>
+      <button
+        type="button"
+        className={styles.select}
+        aria-current={isActive ? 'true' : undefined}
+        onClick={() => onSelect(index)}
+      >
+        <span className={styles.number}>{String(index + 1).padStart(2, '0')}</span>
+        <span className={styles.title}>{track.title}</span>
+        <span className={styles.style}>{track.style}</span>
+        <span className={styles.duration}>{track.durationLabel}</span>
+      </button>
+
+      <a
+        className={styles.spotify}
+        href={track.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Ouvir ${track.title} no Spotify`}
+      >
+        <ExternalLinkIcon size={dense ? 14 : 18} />
+      </a>
+    </div>
   );
 }
 

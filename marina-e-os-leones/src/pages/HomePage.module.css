@@ -3,7 +3,7 @@
    MOBILE-FIRST: a base é sempre uma coluna só; as grades de duas/três colunas
    entram em `min-width: 768px` e `min-width: 1024px`, nunca com `max-width`.
 
-   CONTAINER (convenção desta página): `.section` centra o conteúdo em 1200px e
+   CONTAINER (convenção desta página): `.section` centra o conteúdo em 1280px e
    aplica o padding horizontal padrão — 20px na base, 44px a partir de 1024px.
    Toda seção nova deve reusar `.section`; o espaçamento vertical entre elas é o
    `margin-bottom` dele, para não somar margens divergentes seção a seção.
@@ -16,7 +16,7 @@
 }
 
 .section {
-  max-width: 1200px;
+  max-width: var(--container-max);
   margin: 0 auto 48px;
   padding: 0 20px;
 }
@@ -35,11 +35,11 @@
    No desktop a coluna da direita do hero é feita para sangrar até a borda do
    viewport — por isso o padding-right cai a 0 e o padding-left passa a alinhar
    o texto com o conteúdo das outras seções. O alinhamento usa
-   `max(44px, calc((100% - 1200px) / 2 + 44px))` e NÃO `100vw`: `vw` inclui a
+   `max(44px, calc((100% - 1280px) / 2 + 44px))` e NÃO `100vw`: `vw` inclui a
    largura da barra de rolagem clássica (Windows/Linux) e criaria scroll
    horizontal de alguns pixels. */
 .heroSection {
-  max-width: 1200px;
+  max-width: var(--container-max);
   margin: 0 auto;
   padding: var(--space-6) 20px 0;
 }
@@ -48,14 +48,14 @@
   .heroSection {
     max-width: none;
     padding: var(--space-10) 0 0
-      max(var(--space-section-x), calc((100% - 1200px) / 2 + var(--space-section-x)));
+      max(var(--space-section-x), calc((100% - var(--container-max)) / 2 + var(--space-section-x)));
   }
 }
 
 /* --- banner "próximo show" ------------------------------------------------- */
 
 .bannerSection {
-  max-width: 1200px;
+  max-width: var(--container-max);
   margin: 40px auto 56px;
   padding: 0 20px;
 }
@@ -229,7 +229,7 @@
   .mediaKitGrid {
     grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
     align-items: start;
-    gap: var(--space-8);
+    gap: var(--space-6);
   }
 }
 
@@ -239,8 +239,10 @@
 }
 
 @media (min-width: 768px) {
+  /* 38px é a medida do painel no design — fora da escala 4/8pt, como o 34px do
+     .contactCard ao lado. Não é o recuo de seção (--space-section-x). */
   .mediaKitPanel {
-    padding: var(--space-section-x);
+    padding: 38px;
   }
 }
 
@@ -259,7 +261,7 @@
 }
 
 .panelText {
-  max-width: 46ch;
+  max-width: 520px;
   margin-top: var(--space-4);
   font-family: var(--font-body);
   font-size: var(--text-base);

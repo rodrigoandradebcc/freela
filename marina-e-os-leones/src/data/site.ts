@@ -19,7 +19,11 @@ export const NEXT_SHOW = {
 /** Rodapé da Home: "Belém · Pará · (91) 98000-0000 · contato@marinaeosleones.com". */
 export const CONTACT = {
   city: 'Belém · Pará',
-  phone: '(91) 98000-0000',
+  phone: '(91) 98119-0005',
+  /** Mesmo número em E.164 sem símbolos — formato exigido pelo link wa.me. */
+  whatsapp: '5591981190005',
+  /** Quem atende do outro lado; entra na saudação da mensagem do WhatsApp. */
+  whatsappContact: 'Kardec',
   email: 'contato@marinaeosleones.com',
 } as const;
 
@@ -72,14 +76,14 @@ export const ABOUT_TEXT = {
   eyebrowHome: 'SOBRE A BANDA',
   titleHome: 'Uma identidade que vem da Amazônia',
   paragraphsHome: [
-    'O repertório dançante e inovador mistura batidas que vão do reggae ao reggaeton, pop rock nacional e internacional, ritmos regionais e brasilidades — hits atuais e clássicos em versões e releituras contagiantes.',
+    'O repertório dançante e inovador mistura batidas que vão do reggae ao reggaeton, pop rock nacional e internacional, ritmos regionais e brasilidades: hits atuais e clássicos em versões e releituras contagiantes.',
     'Com anos de estrada, já passaram por festivais e abriram grandes shows nacionais como Vanessa da Mata, Samuel Rosa e Cidade Verde Sounds, levando a força do som produzido no Norte para todo o Brasil.',
   ],
   eyebrowPage: 'DESDE 2013 · BELÉM DO PARÁ',
   titlePage: 'Uma identidade que vem da Amazônia',
   paragraphsPage: [
     'Marina & Os Leones é uma banda paraense de Belém que vem se destacando no cenário musical pela versatilidade e energia de seus shows, conquistando cada vez mais admiradores.',
-    'O repertório dançante e inovador mistura reggae, reggaeton, pop rock nacional e internacional, ritmos regionais e brasilidades — hits atuais e clássicos em versões e releituras contagiantes, para públicos dos mais variados gostos e idades.',
+    'O repertório dançante e inovador mistura reggae, reggaeton, pop rock nacional e internacional, ritmos regionais e brasilidades: hits atuais e clássicos em versões e releituras contagiantes, para públicos dos mais variados gostos e idades.',
   ],
 } as const;
 
@@ -117,5 +121,5 @@ export const HERO = {
   eyebrow: 'BELÉM · PARÁ · AMAZÔNIA',
   titleParts: ['O som do', 'Norte que faz', 'a pista ', 'rugir', '.'],
   paragraph:
-    'Reggae, reggaeton, pop rock e ritmos regionais em versões dançantes — a energia amazônica nas melhores casas e eventos do país.',
+    'Reggae, reggaeton, pop rock e ritmos regionais em versões dançantes. A energia amazônica nas melhores casas e eventos do país.',
 } as const;

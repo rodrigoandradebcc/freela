@@ -39,13 +39,13 @@
 /* `position: relative` (sem z-index) basta para o conteúdo ficar acima do
    blob, já que ele vem antes no DOM. */
 /* O padding horizontal mora AQUI (no mesmo elemento que centraliza), não em
-   `.hero` — colocá-lo no wrapper externo recentraliza a caixa de 1200px numa
+   `.hero` — colocá-lo no wrapper externo recentraliza a caixa de 1280px numa
    área já estreitada por ele, e o conteúdo fica desalinhado do Header/Footer
    mesmo com o `.heroInner` batendo na borda certa (mesma classe de bug já
    corrigida no Footer). */
 .heroInner {
   position: relative;
-  max-width: 1200px;
+  max-width: var(--container-max);
   margin: 0 auto;
   padding: var(--space-6) 20px var(--space-8);
 }
@@ -88,7 +88,7 @@
 
 .grid {
   display: flex;
-  max-width: 1200px;
+  max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 20px;
   flex-direction: column;

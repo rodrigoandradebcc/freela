@@ -62,7 +62,7 @@ export default function MidiaKitPage(): JSX.Element {
 
           <p className={styles.heroParagraph}>
             Release atualizado, rider técnico, mapa de palco, fotos em alta resolução e logos em
-            vetor — um único pacote, sempre na versão mais recente.
+            vetor. Um único pacote, sempre na versão mais recente.
           </p>
 
           <div className={styles.heroActions}>

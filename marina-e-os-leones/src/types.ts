@@ -28,6 +28,18 @@ export interface Track {
   style: string;          // "REGGAE" | "POP ROCK" | "REGGAETON" etc
   durationLabel: string;  // "3:58"
   durationSec: number;    // 238
+  url: string;            // faixa no Spotify — abre em nova aba
+}
+
+/**
+ * Pill de "OUÇA NA SUA PLATAFORMA" e do card do player.
+ * `url` ausente = plataforma que o cliente ainda não forneceu (ver PlatformLinks).
+ */
+export interface PlatformLink {
+  name: string;
+  url?: string;
+  /** Sobrescreve o nome acessível padrão ("Ouvir no {name}"). */
+  ariaLabel?: string;
 }
 
 export interface Video {

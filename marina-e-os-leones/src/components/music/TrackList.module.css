@@ -13,18 +13,21 @@
   list-style: none;
 }
 
+/* `.row` é um <div> e NÃO o elemento clicável: a linha tem dois destinos
+   (tocar aqui / abrir no Spotify) e um link dentro de um botão é inválido.
+   Ver TrackList.tsx. */
 .row {
   --row-pad-y: var(--space-3);
   --row-pad-x: var(--space-4);
+  --row-gap: var(--space-3);
 
   position: relative;
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--row-gap);
   width: 100%;
   min-height: 56px;
   padding: var(--row-pad-y) var(--row-pad-x);
-  border: 0;
   border-radius: var(--radius-md);
   background-color: var(--color-bg-alt);
   color: var(--color-text);
@@ -34,6 +37,67 @@
 
 .row:hover {
   background-color: var(--color-bg-alt-hover);
+}
+
+/* O botão de selecionar ocupa o texto da linha, mas a área CLICÁVEL é a linha
+   inteira: o `::after` esticado cobre inclusive o padding de `.row`. O link do
+   Spotify se sobrepõe a ele por `z-index` (ver `.spotify`). */
+.select {
+  position: static;
+  display: flex;
+  align-items: center;
+  gap: var(--row-gap);
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+}
+
+.select::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+/* --- atalho para a faixa no Spotify --------------------------------------- */
+
+/* 44px de alvo de toque (WCAG 2.5.8) num disco de 36px: o `outline` fica no
+   disco e a área extra vem do `::before` invisível. */
+.spotify {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-green);
+  color: var(--color-green-lighter);
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.spotify::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+}
+
+.spotify:hover {
+  background-color: var(--color-green-dark);
+}
+
+.dense .spotify {
+  width: 30px;
+  height: 30px;
 }
 
 /* Home: linhas mais compactas (a seção ali é um preview, não a página toda). */
@@ -48,8 +112,7 @@
   .row {
     --row-pad-y: var(--space-4);
     --row-pad-x: var(--space-5);
-
-    gap: var(--space-4);
+    --row-gap: var(--space-4);
   }
 
   .dense {

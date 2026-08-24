@@ -35,7 +35,7 @@ import { Button } from '@/components/ui/Button';
 import { SectionEyebrow } from '@/components/ui/SectionEyebrow';
 import { TexturedPanel } from '@/components/ui/TexturedPanel';
 import { VideoCard } from '@/components/video/VideoCard';
-import { MEDIA_KIT_DOWNLOAD_LABEL } from '@/data/mediaKit';
+import { MEDIA_KIT_HOME_CTA_LABEL } from '@/data/mediaKit';
 import { showsPreview } from '@/data/shows';
 import { ABOUT_TEXT, OPENED_FOR } from '@/data/site';
 import {
@@ -195,8 +195,8 @@ export default function HomePage(): JSX.Element {
             </h2>
 
             <p className={styles.panelText}>
-              Release, rider técnico, fotos em alta e logos em vetor: tudo o que a produção do seu
-              evento precisa, reunido em uma página só.
+              Release, rider técnico, mapa de palco, fotos em alta e logos: tudo em um pacote
+              único, pronto para a sua produção.
             </p>
 
             {/* Os três botões levam à página Mídia kit, onde ficam os arquivos
@@ -204,7 +204,7 @@ export default function HomePage(): JSX.Element {
                 download na Home. */}
             <div className={styles.panelActions}>
               <Button variant="dark" as="link" to="/midia-kit" icon={<DownloadIcon />}>
-                {MEDIA_KIT_DOWNLOAD_LABEL}
+                {MEDIA_KIT_HOME_CTA_LABEL}
               </Button>
 
               <Button

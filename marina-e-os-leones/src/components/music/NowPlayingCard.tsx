@@ -21,6 +21,7 @@ import { PauseIcon, PlayIcon } from '@/components/icons';
 import { AppImage } from '@/components/ui/AppImage';
 import { SectionEyebrow } from '@/components/ui/SectionEyebrow';
 import { PLATFORMS } from '@/data/tracks';
+import type { PlatformLink } from '@/types';
 import { usePlayer } from '@/player/PlayerContext';
 
 import { PlatformLinks } from './PlatformLinks';
@@ -35,8 +36,33 @@ export interface NowPlayingCardProps {
 
 /** Home: Spotify, Apple Music, Deezer e YouTube Music (sem Tidal, como no design). */
 const HOME_PLATFORMS = PLATFORMS.slice(0, 4);
-/** Página Música: a lista completa já aparece em outra seção; aqui só o atalho. */
-const FULL_PLATFORMS = ['SPOTIFY'];
+
+/**
+ * As pills do player apontam para a FAIXA que está tocando, não para o perfil
+ * da banda (esse é o destino do bloco "ouça na sua plataforma", em outra
+ * seção). Por isso a lista é montada a cada faixa, e não é uma constante.
+ *
+ * O `ariaLabel` acrescenta o nome da faixa sem tirar o texto visível da pill
+ * de dentro do rótulo — exigência de "Label in Name" (ver PlatformLinks).
+ */
+function platformsFor(track: { title: string; url: string }, isFull: boolean): PlatformLink[] {
+  if (isFull) {
+    // Página Música: a lista completa já aparece embaixo; aqui só o atalho.
+    return [
+      {
+        name: 'ABRIR NO SPOTIFY',
+        url: track.url,
+        ariaLabel: `Abrir no Spotify: ${track.title}`,
+      },
+    ];
+  }
+
+  return HOME_PLATFORMS.map((platform) =>
+    platform.name === 'SPOTIFY'
+      ? { ...platform, url: track.url, ariaLabel: `Ouvir no Spotify: ${track.title}` }
+      : platform,
+  );
+}
 
 export function NowPlayingCard({ variant, className }: NowPlayingCardProps): JSX.Element {
   const { currentTrack, playing, progressPct, currentTimeLabel, toggle } = usePlayer();
@@ -94,7 +120,7 @@ export function NowPlayingCard({ variant, className }: NowPlayingCardProps): JSX
         </div>
 
         <PlatformLinks
-          platforms={isFull ? FULL_PLATFORMS : HOME_PLATFORMS}
+          platforms={platformsFor(currentTrack, isFull)}
           layout="dark"
           className={styles.platforms}
         />
