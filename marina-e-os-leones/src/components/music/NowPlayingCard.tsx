@@ -61,8 +61,6 @@ export function NowPlayingCard({ variant, className }: NowPlayingCardProps): JSX
           </div>
         </div>
 
-        {/* `key` força o iframe a remontar ao trocar de faixa: sem ele o
-            Spotify mantém a faixa anterior carregada. */}
         <iframe
           key={currentTrack.spotifyId}
           className={styles.embed}

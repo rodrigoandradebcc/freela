@@ -1,9 +1,3 @@
-/* ReelCard.module.css — card vertical de Reel do Instagram.
-
-   A altura é fixa (420px no design) e a capa preenche por `object-fit: cover`:
-   os originais são 9:16 e a coluna é mais estreita que isso, então o recorte
-   sempre acontece nas laterais, nunca no topo/base onde está o rosto. */
-
 .card {
   position: relative;
   display: block;
@@ -12,8 +6,6 @@
   border: 0;
   text-align: left;
   overflow: hidden;
-  /* 26px é a medida do design — um degrau abaixo do --radius-lg (28px) usado
-     nos painéis grandes, porque o card é estreito. */
   border-radius: 26px;
   background-color: var(--color-dark);
   box-shadow: 0 8px 22px rgba(46, 43, 37, 0.16);
@@ -38,8 +30,6 @@
   }
 }
 
-/* Para de 55% da altura para cima: o topo da capa fica limpo, e a base ganha o
-   escuro que o título precisa para passar em contraste. */
 .scrim {
   position: absolute;
   inset: 0;

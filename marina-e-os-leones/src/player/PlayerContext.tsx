@@ -1,15 +1,7 @@
 /**
- * Player global: mantém apenas a faixa selecionada.
- *
- * Quem toca o áudio é o embed oficial do Spotify dentro do `NowPlayingCard`
- * (ver aquele arquivo). Por isso aqui não existe `playing`, `elapsed` nem
- * `toggle`: esse estado mora dentro do iframe do Spotify, em outra origem, e
- * não há API para lê-lo ou controlá-lo sem carregar o SDK deles.
- *
- * O contexto existe porque a faixa é escolhida num lugar (a lista de
- * repertório, presente na Home e na página Música) e tocada em outro (o card
- * do player). Como o provider vive acima do layout, a faixa escolhida na Home
- * continua selecionada ao navegar para /musica.
+ * Player global: mantém apenas a faixa selecionada. A faixa é escolhida na
+ * lista de repertório (Home ou /musica) e tocada no card do player; como o
+ * provider vive acima do layout, a escolha sobrevive à navegação.
  */
 
 import { createContext, useCallback, useContext, useMemo, useState } from 'react';

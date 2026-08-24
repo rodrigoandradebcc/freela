@@ -43,8 +43,6 @@
   background-color: var(--color-bg-alt-hover);
 }
 
-/* O embed do Instagram tem largura mínima própria (~326px) e altura fixa: não
-   é responsivo por dentro, então a altura é reservada aqui. */
 .frame {
   width: 100%;
   height: min(720px, 78vh);

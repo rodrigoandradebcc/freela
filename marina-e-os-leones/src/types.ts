@@ -28,20 +28,13 @@ export interface Track {
   style: string;          // "REGGAE" | "POP ROCK" | "REGGAETON" etc
   durationLabel: string;  // "3:58"
   durationSec: number;    // 238
-  /** ID da faixa no Spotify: alimenta o link externo E o embed do player. */
   spotifyId: string;
-  /** Página da faixa no Spotify — abre em nova aba. Derivado de `spotifyId`. */
   url: string;
 }
 
-/**
- * Pill de "OUÇA NA SUA PLATAFORMA" e do card do player.
- * `url` ausente = plataforma que o cliente ainda não forneceu (ver PlatformLinks).
- */
 export interface PlatformLink {
   name: string;
   url?: string;
-  /** Sobrescreve o nome acessível padrão ("Ouvir no {name}"). */
   ariaLabel?: string;
 }
 
@@ -55,11 +48,6 @@ export interface Video {
   meta?: string;        // "Show completo · 1h48 · 24 mil visualizações"
 }
 
-/**
- * Reel do Instagram exibido na página 4 · Vídeos. Não tem duração nem
- * descrição: o card mostra só a capa, o selo "REELS" e o título, e o clique
- * leva ao post no Instagram.
- */
 export interface Reel {
   id: string;
   title: string;

@@ -1,9 +1,9 @@
-/* NowPlayingCard.module.css — card escuro do player mock.
+/* NowPlayingCard.module.css — card escuro do player.
 
    As duas variantes ('home' compacta / 'full' grande) mudam SÓ escala: padding,
-   círculo da marca, botão de transporte, tamanho do título e da marca d'água.
-   Por isso cada variante é apenas um conjunto de custom properties, e as regras
-   de layout — que são idênticas nas duas — existem uma única vez em `.card`. */
+   círculo da marca, tamanho do título e da marca d'água. Por isso cada variante
+   é apenas um conjunto de custom properties, e as regras de layout — que são
+   idênticas nas duas — existem uma única vez em `.card`. */
 
 .card {
   position: relative;
@@ -13,8 +13,7 @@
   background-color: var(--color-dark);
   color: var(--color-text-on-dark);
   /* O anel de foco padrão (marrom) dá 2,44:1 sobre este fundo e reprova WCAG
-     1.4.11. Redefinido aqui, é herdado pelo botão de play/pause e pelas pills
-     de plataforma: 15,17:1. */
+     1.4.11. Redefinido aqui, é herdado pelas pills de plataforma: 15,17:1. */
   --color-focus-ring: var(--color-focus-ring-on-dark);
 }
 
@@ -118,8 +117,6 @@
   line-height: 1.3;
   color: var(--color-dark-muted);
 }
-
-/* --- player do Spotify ------------------------------------------------------ */
 
 .embed {
   display: block;

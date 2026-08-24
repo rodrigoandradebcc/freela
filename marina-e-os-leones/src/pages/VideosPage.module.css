@@ -102,8 +102,6 @@
 
 /* --- Reels do Instagram ----------------------------------------------------- */
 
-/* Mesma estrutura do cabeçalho da página (título à esquerda, botão à direita a
-   partir de 768px), um degrau menor. */
 .reelsHeader {
   display: flex;
   flex-direction: column;
@@ -129,9 +127,8 @@
   color: var(--color-text);
 }
 
-/* Cards verticais: duas colunas já no celular (o Reel é estreito e ficaria
-   absurdamente alto ocupando a largura toda), quatro no desktop como no
-   design. `minmax(0, 1fr)` impede que um título longo estoure a coluna. */
+/* Duas colunas no celular (o Reel é estreito e ficaria altíssimo ocupando a
+   largura toda), quatro no desktop como no design. */
 .reelsGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

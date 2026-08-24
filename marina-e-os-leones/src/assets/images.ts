@@ -129,7 +129,7 @@ export const images = {
     height: 533,
     alt: 'Plateia lotada dançando durante show de Marina & Os Leones no Ver-o-Peso',
   },
-  /** Capa do vídeo em destaque da página 4 · Vídeos ("Ensaio Aberto #1"). */
+  /** Capa do vídeo em destaque da página 4 · Vídeos. */
   videoEnsaioAberto: {
     src: ensaioAberto800,
     src2x: ensaioAberto1600,
@@ -138,8 +138,7 @@ export const images = {
     alt: 'Marina & Os Leones tocando durante o Ensaio Aberto #1',
   },
 
-  /* Reels do Instagram (página 4 · Vídeos). Todos verticais: o recorte é feito
-     por `object-fit: cover` no card, que é mais estreito que o original. */
+  /** Reels do Instagram (página 4 · Vídeos). */
   reelEnsaioEstudio: {
     src: reel1_800,
     width: 639,

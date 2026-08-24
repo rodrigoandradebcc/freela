@@ -21,24 +21,15 @@ export const NEXT_SHOW = {
 export const CONTACT = {
   city: 'Belém · Pará',
   phone: '(91) 98119-0005',
-  /** Mesmo número em E.164 sem símbolos — formato exigido pelo link wa.me. */
   whatsapp: '5591981190005',
-  /** Quem atende do outro lado; entra na saudação da mensagem do WhatsApp. */
   whatsappContact: 'Kardec',
   email: 'contato@marinaeosleones.com',
 } as const;
 
-/** Canal oficial no YouTube. */
 export const CHANNEL_URL = 'https://www.youtube.com/@MarinaEOsLeones';
 
-/** Perfil oficial no Instagram — origem dos Reels da página 4 · Vídeos. */
 export const INSTAGRAM_URL = 'https://www.instagram.com/marinaeosleones/';
 
-/**
- * O design original só exibia os rótulos das redes (INSTAGRAM / YOUTUBE / SPOTIFY),
- * sem URLs reais. YouTube e Instagram já estão confirmados; o Spotify do rodapé
- * usa o perfil do artista (o mesmo do bloco de plataformas em `@/data/tracks`).
- */
 export const SOCIAL_LINKS = [
   { id: 'instagram', label: 'Instagram', icon: 'socialInstagram', href: INSTAGRAM_URL },
   { id: 'youtube', label: 'YouTube', icon: 'socialYoutube', href: CHANNEL_URL },

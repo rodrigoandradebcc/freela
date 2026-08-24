@@ -45,9 +45,7 @@ const LOGO_QUALITY = 90
  * Lista das imagens realmente referenciadas no HTML do design.
  * Tudo que não está aqui (ml03, ml04, ml06, ml08, ml10, ml11, live02, marina00,
  * member2, member3, logo.png) não aparece no markup e por isso não é processado.
- *
- * `show-plateia` continua na lista mesmo depois de a página de Vídeos trocar o
- * destaque para `ensaio-aberto`: o manifesto ainda expõe `videoFeaturedPress`.
+
  *
  * kind:
  *   'hero'  -> duas larguras (1600 + 800) para srcset
@@ -68,7 +66,6 @@ const JOBS = [
   { source: 'show-marina2.png', base: 'show-marina2', kind: 'hero' },
   { source: 'show-plateia.png', base: 'show-plateia', kind: 'hero' },
   { source: 'show-palco.png', base: 'show-palco', kind: 'hero' },
-  // Capa do vídeo em destaque da página 4 · Vídeos ("Ensaio Aberto #1").
   { source: 'ensaio-aberto.png', base: 'ensaio-aberto', kind: 'hero' },
 
   // Cards / thumbs
@@ -81,8 +78,7 @@ const JOBS = [
   { source: 'show-guitarra.png', base: 'show-guitarra', kind: 'card' },
   { source: 'member1.png', base: 'member1', kind: 'card' },
 
-  // Reels do Instagram (página 4 · Vídeos). Verticais (~640x820); o card os
-  // corta nas laterais com object-fit: cover.
+  // Reels do Instagram (página 4 · Vídeos).
   { source: 'reel1.png', base: 'reel1', kind: 'card' },
   { source: 'reel2.png', base: 'reel2', kind: 'card' },
   { source: 'reel3.png', base: 'reel3', kind: 'card' },

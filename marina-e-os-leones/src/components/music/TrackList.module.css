@@ -13,9 +13,6 @@
   list-style: none;
 }
 
-/* `.row` é um <div> e NÃO o elemento clicável: a linha tem dois destinos
-   (tocar aqui / abrir no Spotify) e um link dentro de um botão é inválido.
-   Ver TrackList.tsx. */
 .row {
   --row-pad-y: var(--space-3);
   --row-pad-x: var(--space-4);
@@ -39,9 +36,6 @@
   background-color: var(--color-bg-alt-hover);
 }
 
-/* O botão de selecionar ocupa o texto da linha, mas a área CLICÁVEL é a linha
-   inteira: o `::after` esticado cobre inclusive o padding de `.row`. O link do
-   Spotify se sobrepõe a ele por `z-index` (ver `.spotify`). */
 .select {
   position: static;
   display: flex;
@@ -65,8 +59,6 @@
 
 /* --- atalho para a faixa no Spotify --------------------------------------- */
 
-/* 44px de alvo de toque (WCAG 2.5.8) num disco de 36px: o `outline` fica no
-   disco e a área extra vem do `::before` invisível. */
 .spotify {
   position: relative;
   z-index: 1;

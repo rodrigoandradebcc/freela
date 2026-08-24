@@ -213,7 +213,7 @@ export function DownloadIcon(props: IconProps): JSX.Element {
 }
 
 /* -----------------------------------------------------------------------------
-   Link externo (botão "Ouvir no Spotify" de cada faixa do repertório)
+   Link externo
    -------------------------------------------------------------------------- */
 
 export function ExternalLinkIcon(props: IconProps): JSX.Element {

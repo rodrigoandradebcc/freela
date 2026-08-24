@@ -14,12 +14,6 @@
  * Acessibilidade: selecionar a faixa é um `<button type="button">`, nunca um
  * `<div onClick>` — assim ganha foco, Enter/Espaço e papel correto de graça. A
  * linha da faixa tocando leva `aria-current="true"`.
- *
- * A linha tem DOIS destinos (tocar no player daqui / abrir a faixa no Spotify),
- * então não pode ser um único elemento clicável: o botão e o link são irmãos
- * dentro de `.row` (link dentro de botão é HTML inválido). O botão continua
- * cobrindo a linha inteira por um `::after` esticado, e o link do Spotify fica
- * acima dele — ver `.select::after` / `.spotify` no CSS.
  */
 
 import type { JSX } from 'react';

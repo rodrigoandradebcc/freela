@@ -8,9 +8,8 @@ export interface ReelLightboxProps {
   onClose: () => void;
 }
 
-/** `https://www.instagram.com/p/CODIGO/` → `https://www.instagram.com/p/CODIGO/embed/` */
 function embedUrl(postUrl: string): string {
-  return `${postUrl.replace(/\/+$/, '')}/embed/`;
+  return `${postUrl.endsWith('/') ? postUrl.slice(0, -1) : postUrl}/embed/`;
 }
 
 export function ReelLightbox({ title, url, onClose }: ReelLightboxProps): JSX.Element {
@@ -34,7 +33,6 @@ export function ReelLightbox({ title, url, onClose }: ReelLightboxProps): JSX.El
       aria-label={title}
       onClose={onClose}
       onClick={(event) => {
-        // Clique no backdrop: o alvo é o próprio <dialog>, nunca um filho.
         if (event.target === dialogRef.current) dialogRef.current?.close();
       }}
     >
@@ -54,7 +52,6 @@ export function ReelLightbox({ title, url, onClose }: ReelLightboxProps): JSX.El
           title={title}
           allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
           allowFullScreen
-          scrolling="no"
         />
 
         <a className={styles.external} href={url} target="_blank" rel="noopener noreferrer">

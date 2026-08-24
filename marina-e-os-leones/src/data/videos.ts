@@ -24,16 +24,9 @@ export type FeaturedVideoData = Omit<Video, 'image' | 'duration'> & {
   imageKey: string;
 };
 
-/** Reel do Instagram com imagem por chave de manifesto em vez de `ImageMeta`. */
 export type ReelData = Omit<Reel, 'image'> & { imageKey: string };
 
-/**
- * Página 4 · Vídeos — vídeo em destaque no topo.
- *
- * `youtubeId` é o vídeo real no canal; a página monta o player a partir dele
- * (ver VideosPage) e usa `imageKey` como capa antes do clique, em vez de puxar
- * a miniatura de `i.ytimg.com`.
- */
+/** Página 4 · Vídeos — vídeo em destaque no topo. */
 export const featuredVideo: FeaturedVideoData & { youtubeId: string; start?: number } = {
   id: 'ensaio-aberto-1',
   title: 'Ensaio Aberto #1 (Ao Vivo)',
@@ -44,13 +37,7 @@ export const featuredVideo: FeaturedVideoData & { youtubeId: string; start?: num
   start: 1079,
 };
 
-/**
- * Página 4 · Vídeos — grade de Reels do Instagram.
- *
- * Cada card leva ao post original: o Instagram não permite embed de Reel sem
- * o SDK oficial (que exige carregar script de terceiro e não funciona para
- * conta pessoal), então o card é capa + link, como no design.
- */
+/** Página 4 · Vídeos — grade de Reels do Instagram. */
 export const reels: ReelData[] = [
   {
     id: 'ensaio-aberto-estudio',

@@ -24,10 +24,7 @@
  * -----------------
  * Este slot toca um vídeo real do canal oficial (embed do YouTube), não o
  * card estático mockado do design original — troca pedida depois da entrega
- * inicial. O `YoutubeEmbed` mostra a capa e só monta o player no clique: é o
- * que permite tocar COM SOM (autoplay com áudio é bloqueado pelos
- * navegadores — ver YoutubeEmbed). O `FeaturedVideo` (card com imagem +
- * overlay) segue disponível em
+ * inicial. O `FeaturedVideo` (card com imagem + overlay) segue disponível em
  * `@/components/video/FeaturedVideo` para quando houver conteúdo sem embed
  * real disponível — só não é mais usado nesta seção.
  */

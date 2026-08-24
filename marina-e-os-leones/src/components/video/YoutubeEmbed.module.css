@@ -16,10 +16,6 @@
   border: 0;
 }
 
-/* --- capa (antes do clique) ------------------------------------------------ */
-
-/* A capa do YouTube vem em 16:9 com barras pretas quando a fonte é vertical;
-   `object-fit: cover` corta essas barras em vez de exibi-las. */
 .poster {
   position: absolute;
   inset: 0;
@@ -28,8 +24,6 @@
   object-fit: cover;
 }
 
-/* Botão de play centralizado sobre a capa. A área clicável é a CAPA INTEIRA
-   (o `::after` esticado), não só o disco — o disco é o alvo visual. */
 .play {
   position: absolute;
   top: 50%;

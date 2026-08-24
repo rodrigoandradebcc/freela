@@ -3,16 +3,11 @@
  *   'quick' → bloco curto da Home (nome, evento, WhatsApp)
  *   'full'  → página Mídia kit (nome, empresa, evento, WhatsApp ou e-mail)
  *
- * NÃO HÁ BACK-END, e continua não havendo: o submit monta uma mensagem com o
- * que foi preenchido e abre o WhatsApp da produção (`CONTACT.whatsapp`) via
- * link `wa.me` já com o texto pronto. Quem envia é a pessoa, do próprio
- * aparelho — por isso não existe estado de "Enviando…" nem tratamento de erro
- * de rede: nenhuma requisição sai daqui.
- *
- * O `window.open` acontece DENTRO do handler de submit, ou seja, no gesto do
- * usuário — é o que impede o bloqueador de pop-up de barrar a aba. Mesmo
- * assim a confirmação repete o link: se a aba for bloqueada, ainda dá para
- * clicar (ver `statusRegion`).
+ * NÃO HÁ BACK-END: o submit monta uma mensagem com o que foi preenchido e abre
+ * o WhatsApp da produção (`CONTACT.whatsapp`) via link `wa.me` já com o texto
+ * pronto. O `window.open` acontece dentro do handler de submit (gesto do
+ * usuário) para não ser barrado pelo bloqueador de pop-up; a confirmação
+ * repete o link caso seja barrado mesmo assim.
  *
  * Acessibilidade: todo campo tem <label> VISÍVEL associado por htmlFor/id
  * (placeholder não é rótulo); a confirmação é role="status" + aria-live="polite".
@@ -78,14 +73,6 @@ const FULL_FIELDS: readonly FieldConfig[] = [
   },
 ];
 
-/**
- * Monta o texto da mensagem: uma saudação e, embaixo, "Rótulo: valor" para cada
- * campo PREENCHIDO. Campos opcionais deixados em branco simplesmente não
- * entram — mandar "Empresa: (vazio)" só polui a conversa.
- *
- * Os rótulos vêm da mesma `FieldConfig` que desenha o formulário, então mudar o
- * texto de um campo muda a mensagem junto, sem uma segunda lista para manter.
- */
 function buildWhatsappMessage(
   fields: readonly FieldConfig[],
   values: Record<string, string>,
@@ -104,7 +91,6 @@ function buildWhatsappMessage(
   return [greeting, '', ...lines].join('\n');
 }
 
-/** Link wa.me com a mensagem já embutida. `encodeURIComponent` preserva as quebras de linha. */
 function buildWhatsappUrl(message: string): string {
   return `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(message)}`;
 }
@@ -115,7 +101,6 @@ export function ContactForm({ variant }: ContactFormProps): JSX.Element {
   // Prefixo único: as duas variantes podem coexistir na mesma página.
   const idPrefix = useId();
   const [values, setValues] = useState<Record<string, string>>({});
-  // Guarda a URL usada no submit para poder reoferecê-la se o pop-up for barrado.
   const [sentUrl, setSentUrl] = useState<string | null>(null);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
