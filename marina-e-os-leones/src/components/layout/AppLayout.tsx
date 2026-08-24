@@ -49,7 +49,7 @@ export function AppLayout({ children }: AppLayoutProps): JSX.Element {
 
       <Header variant={pathname === PRESS_ROUTE ? 'press' : 'default'} />
 
-      <main id="main-content" className={styles.main} key={pathname}>
+      <main id="main-content" className={styles.main}>
         {children}
       </main>
 

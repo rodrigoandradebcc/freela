@@ -19,6 +19,7 @@ import type { JSX } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router';
 
 import { AppLayout } from '@/components/layout/AppLayout';
+import { RouteTransition } from '@/components/layout/RouteTransition';
 import { PlayerProvider } from '@/player/PlayerContext';
 
 import styles from './App.module.css';
@@ -49,14 +50,16 @@ export default function App(): JSX.Element {
       <PlayerProvider>
         <AppLayout>
           <Suspense fallback={<RouteFallback />}>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/agenda" element={<AgendaPage />} />
-              <Route path="/musica" element={<MusicaPage />} />
-              <Route path="/videos" element={<VideosPage />} />
-              <Route path="/sobre" element={<SobrePage />} />
-              <Route path="/midia-kit" element={<MidiaKitPage />} />
-            </Routes>
+            <RouteTransition>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/agenda" element={<AgendaPage />} />
+                <Route path="/musica" element={<MusicaPage />} />
+                <Route path="/videos" element={<VideosPage />} />
+                <Route path="/sobre" element={<SobrePage />} />
+                <Route path="/midia-kit" element={<MidiaKitPage />} />
+              </Routes>
+            </RouteTransition>
           </Suspense>
         </AppLayout>
       </PlayerProvider>

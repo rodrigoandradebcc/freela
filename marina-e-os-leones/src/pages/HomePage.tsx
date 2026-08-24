@@ -188,7 +188,7 @@ export default function HomePage(): JSX.Element {
       {/* --- prévia do mídia kit ------------------------------------------ */}
       <section className={styles.section} aria-labelledby="home-media-kit-title">
         <div className={styles.mediaKitGrid}>
-          <Reveal>
+          <Reveal className={styles.mediaKitCell}>
             <TexturedPanel tone="orange" className={styles.mediaKitPanel}>
               <SectionEyebrow className={styles.panelEyebrow}>PARA CONTRATANTES</SectionEyebrow>
 
@@ -235,7 +235,7 @@ export default function HomePage(): JSX.Element {
             </TexturedPanel>
           </Reveal>
 
-          <Reveal index={1}>
+          <Reveal index={1} className={styles.mediaKitCell}>
             <div className={styles.contactCard}>
               <h3 className={styles.contactTitle}>Fale com a produção</h3>
               <ContactForm variant="quick" />

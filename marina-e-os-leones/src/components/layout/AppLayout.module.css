@@ -12,15 +12,8 @@
    nos dois criaria um vão morto entre o conteúdo e o rodapé. */
 .main {
   flex: 1 0 auto;
-  animation: pageEnter 180ms var(--ease-out) both;
 }
 
-@keyframes pageEnter {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-}
 
 /* --- skip link -------------------------------------------------------------
    Fica escondido pela classe global `.visually-hidden` até receber foco. No
