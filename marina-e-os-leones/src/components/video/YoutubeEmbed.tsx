@@ -1,6 +1,8 @@
 import { useState, type JSX } from 'react';
 
 import { PlayIcon } from '@/components/icons';
+import { AppImage } from '@/components/ui/AppImage';
+import type { ImageMeta } from '@/types';
 
 import styles from './YoutubeEmbed.module.css';
 
@@ -11,6 +13,12 @@ export interface YoutubeEmbedProps {
   title: string;
   /** Segundo inicial de reprodução, se o link de origem apontava para um trecho. */
   start?: number;
+  /**
+   * Capa exibida antes do clique. Sem ela a capa vem de `i.ytimg.com` — serve,
+   * mas é uma requisição a terceiro e o enquadramento é o que o YouTube
+   * escolheu. Prefira passar a imagem do manifesto.
+   */
+  poster?: ImageMeta;
   className?: string;
 }
 
@@ -32,7 +40,13 @@ export interface YoutubeEmbedProps {
  * rastreamento antes de qualquer interação do usuário com o player. A capa vem
  * de `i.ytimg.com`, que serve imagem estática e não grava cookie.
  */
-export function YoutubeEmbed({ videoId, title, start, className }: YoutubeEmbedProps): JSX.Element {
+export function YoutubeEmbed({
+  videoId,
+  title,
+  start,
+  poster,
+  className,
+}: YoutubeEmbedProps): JSX.Element {
   const [playing, setPlaying] = useState(false);
 
   const params = new URLSearchParams({
@@ -50,17 +64,21 @@ export function YoutubeEmbed({ videoId, title, start, className }: YoutubeEmbedP
   if (!playing) {
     return (
       <div className={classes}>
-        {/* `maxresdefault` não existe para todo vídeo; o `onError` cai no
-            `hqdefault`, que o YouTube gera para todos. */}
-        <img
-          className={styles.poster}
-          src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
-          alt=""
-          loading="lazy"
-          onError={(event) => {
-            event.currentTarget.src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
-          }}
-        />
+        {poster ? (
+          <AppImage image={poster} alt="" cinematic className={styles.poster} />
+        ) : (
+          /* `maxresdefault` não existe para todo vídeo; o `onError` cai no
+             `hqdefault`, que o YouTube gera para todos. */
+          <img
+            className={styles.poster}
+            src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
+            alt=""
+            loading="lazy"
+            onError={(event) => {
+              event.currentTarget.src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+            }}
+          />
+        )}
 
         <button
           type="button"

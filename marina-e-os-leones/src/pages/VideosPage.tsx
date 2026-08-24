@@ -37,10 +37,10 @@ import type { JSX } from 'react';
 import { images } from '@/assets/images';
 import { Button } from '@/components/ui/Button';
 import { SectionEyebrow } from '@/components/ui/SectionEyebrow';
-import { VideoCard } from '@/components/video/VideoCard';
+import { ReelCard } from '@/components/video/ReelCard';
 import { YoutubeEmbed } from '@/components/video/YoutubeEmbed';
-import { videos } from '@/data/videos';
-import { CHANNEL_URL } from '@/data/site';
+import { featuredVideo, reels } from '@/data/videos';
+import { CHANNEL_URL, INSTAGRAM_URL } from '@/data/site';
 import { usePageTitle } from '@/hooks/usePageTitle';
 import type { ImageMeta } from '@/types';
 
@@ -58,7 +58,7 @@ export default function VideosPage(): JSX.Element {
     <div className={styles.page}>
       <header className={styles.header}>
         <div className={styles.headerText}>
-          <SectionEyebrow>Canal oficial · 18 vídeos</SectionEyebrow>
+          <SectionEyebrow>Canal oficial · Instagram</SectionEyebrow>
           <h1 className={styles.title}>Vídeos</h1>
         </div>
 
@@ -74,15 +74,18 @@ export default function VideosPage(): JSX.Element {
         </Button>
       </header>
 
-      <section className={styles.section}>
-        <h2 className="visually-hidden">Vídeo em destaque</h2>
+      <section className={styles.section} aria-labelledby="videos-featured-title">
+        <h2 className="visually-hidden" id="videos-featured-title">
+          {featuredVideo.title}
+        </h2>
         <YoutubeEmbed
-          videoId="YmR-FVpggzo"
-          title="Marina & Os Leones no YouTube"
-          start={1079}
+          videoId={featuredVideo.youtubeId}
+          title={featuredVideo.title}
+          start={featuredVideo.start}
+          poster={imageFor(featuredVideo.imageKey)}
         />
         <a
-          href="https://www.youtube.com/watch?v=YmR-FVpggzo"
+          href={`https://www.youtube.com/watch?v=${featuredVideo.youtubeId}`}
           target="_blank"
           rel="noreferrer"
           className={styles.watchOnYoutube}
@@ -91,17 +94,34 @@ export default function VideosPage(): JSX.Element {
         </a>
       </section>
 
-      <section className={styles.section}>
-        <h2 className="visually-hidden">Todos os vídeos</h2>
-        <div className={styles.grid}>
-          {videos.map((video) => (
-            <VideoCard
-              key={video.id}
-              size="small"
-              title={video.title}
-              duration={video.duration}
-              description={video.description}
-              image={imageFor(video.imageKey)}
+      <section className={styles.section} aria-labelledby="videos-reels-title">
+        <header className={styles.reelsHeader}>
+          <div className={styles.headerText}>
+            <SectionEyebrow>Instagram · @marinaeosleones</SectionEyebrow>
+            <h2 className={styles.reelsTitle} id="videos-reels-title">
+              Reels
+            </h2>
+          </div>
+
+          <Button
+            variant="outline"
+            as="a"
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noreferrer"
+            className={styles.subscribe}
+          >
+            Ver todos no Instagram
+          </Button>
+        </header>
+
+        <div className={styles.reelsGrid}>
+          {reels.map((reel) => (
+            <ReelCard
+              key={reel.id}
+              title={reel.title}
+              url={reel.url}
+              image={imageFor(reel.imageKey)}
             />
           ))}
         </div>

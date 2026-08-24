@@ -7,6 +7,7 @@
  * manifesto `src/assets/images.ts`.
  */
 
+import { SPOTIFY_ARTIST_URL } from '@/data/tracks';
 import type { NextShow, SocialLink } from '@/types';
 
 /** Tela 1 · Home — bloco de contagem regressiva "PRÓXIMO SHOW". */
@@ -16,7 +17,7 @@ export const NEXT_SHOW = {
   targetIso: '2026-08-29T22:00:00-03:00',
 } as const satisfies NextShow;
 
-/** Rodapé da Home: "Belém · Pará · (91) 98000-0000 · contato@marinaeosleones.com". */
+/** Rodapé da Home: "Belém · Pará · (91) 98119-0005 · contato@marinaeosleones.com". */
 export const CONTACT = {
   city: 'Belém · Pará',
   phone: '(91) 98119-0005',
@@ -27,18 +28,21 @@ export const CONTACT = {
   email: 'contato@marinaeosleones.com',
 } as const;
 
-/** Canal oficial no YouTube — único link social confirmado até agora. */
+/** Canal oficial no YouTube. */
 export const CHANNEL_URL = 'https://www.youtube.com/@MarinaEOsLeones';
+
+/** Perfil oficial no Instagram — origem dos Reels da página 4 · Vídeos. */
+export const INSTAGRAM_URL = 'https://www.instagram.com/marinaeosleones/';
 
 /**
  * O design original só exibia os rótulos das redes (INSTAGRAM / YOUTUBE / SPOTIFY),
- * sem URLs reais. YouTube já tem o canal oficial confirmado; Instagram e
- * Spotify seguem como `href: '#'` até o cliente fornecer os links.
+ * sem URLs reais. YouTube e Instagram já estão confirmados; o Spotify do rodapé
+ * usa o perfil do artista (o mesmo do bloco de plataformas em `@/data/tracks`).
  */
 export const SOCIAL_LINKS = [
-  { id: 'instagram', label: 'Instagram', icon: 'socialInstagram', href: '#' },
+  { id: 'instagram', label: 'Instagram', icon: 'socialInstagram', href: INSTAGRAM_URL },
   { id: 'youtube', label: 'YouTube', icon: 'socialYoutube', href: CHANNEL_URL },
-  { id: 'spotify', label: 'Spotify', icon: 'socialSpotify', href: '#' },
+  { id: 'spotify', label: 'Spotify', icon: 'socialSpotify', href: SPOTIFY_ARTIST_URL },
 ] as const satisfies readonly SocialLink[];
 
 export interface Stat {

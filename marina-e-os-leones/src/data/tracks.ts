@@ -1,16 +1,12 @@
-/**
- * Repertório — extraído do array `tracks` do design fonte
- * (`dur` → `durationLabel`, `s` → `durationSec`, `url` → `url`).
- *
- * São as faixas reais da banda no Spotify: o `url` de cada uma é o link da
- * própria faixa, usado pelo botão redondo de cada linha do repertório e pela
- * pill "ABRIR NO SPOTIFY" do player. Título e `url` andam juntos — não troque
- * um sem o outro.
- */
-
 import type { PlatformLink, Track } from '@/types';
 
-export const tracks: Track[] = [
+const trackUrl = (spotifyId: string): string =>
+  `https://open.spotify.com/intl-pt/track/${spotifyId}`;
+
+export const spotifyEmbedUrl = (spotifyId: string): string =>
+  `https://open.spotify.com/embed/track/${spotifyId}?utm_source=generator&theme=0`;
+
+const TRACK_SEEDS = [
   {
     id: 'blindado',
     title: 'Blindado',
@@ -18,7 +14,7 @@ export const tracks: Track[] = [
     style: 'SINGLE',
     durationLabel: '3:11',
     durationSec: 191,
-    url: 'https://open.spotify.com/intl-pt/track/5JE7OVxZ098Cw790PWr0MG',
+    spotifyId: '5JE7OVxZ098Cw790PWr0MG',
   },
   {
     id: 'templo-de-sol',
@@ -27,7 +23,7 @@ export const tracks: Track[] = [
     style: 'SINGLE',
     durationLabel: '3:03',
     durationSec: 183,
-    url: 'https://open.spotify.com/intl-pt/track/4gmYkA861nPTuvv78szAwD',
+    spotifyId: '4gmYkA861nPTuvv78szAwD',
   },
   {
     id: 'ceu-de-estrelas',
@@ -36,22 +32,18 @@ export const tracks: Track[] = [
     style: 'SINGLE',
     durationLabel: '2:41',
     durationSec: 161,
-    url: 'https://open.spotify.com/intl-pt/track/6LUkETyVV9WmzDeNqGKLx6',
+    spotifyId: '6LUkETyVV9WmzDeNqGKLx6',
   },
-];
+] as const;
 
-/** Perfil da banda no Spotify — destino da pill SPOTIFY do bloco de plataformas. */
+export const tracks: Track[] = TRACK_SEEDS.map((seed) => ({
+  ...seed,
+  url: trackUrl(seed.spotifyId),
+}));
+
 export const SPOTIFY_ARTIST_URL =
   'https://open.spotify.com/intl-pt/artist/4z7SXa0y7AHVMIoMoEFHfe';
 
-/**
- * Bloco "OUÇA NA SUA PLATAFORMA" da página 3 · Música (lista completa).
- * A Home mostra só as quatro primeiras — o componente decide quantas exibir.
- *
- * Só o Spotify tem link: o design fonte não traz URL das outras plataformas
- * (o cliente ainda não forneceu). Ver PlatformLinks para o que acontece quando
- * `url` está ausente.
- */
 export const PLATFORMS: readonly PlatformLink[] = [
   { name: 'SPOTIFY', url: SPOTIFY_ARTIST_URL },
   { name: 'APPLE MUSIC' },
@@ -60,5 +52,4 @@ export const PLATFORMS: readonly PlatformLink[] = [
   { name: 'TIDAL' },
 ];
 
-/** Legenda ao lado do título "Repertório" na página 3 · Música. */
 export const REPERTOIRE_NOTE = '32 FAIXAS NO SHOW COMPLETO';

@@ -46,6 +46,12 @@ import showMarina2Member480 from './img/show-marina2-member-480.webp'
 import showVoz800 from './img/show-voz-800.webp'
 import showGuitarra800 from './img/show-guitarra-800.webp'
 import member1_800 from './img/member1-800.webp'
+import ensaioAberto800 from './img/ensaio-aberto-800.webp'
+import ensaioAberto1600 from './img/ensaio-aberto-1600.webp'
+import reel1_800 from './img/reel1-800.webp'
+import reel2_800 from './img/reel2-800.webp'
+import reel3_800 from './img/reel3-800.webp'
+import reel4_800 from './img/reel4-800.webp'
 
 export const images = {
   /** Símbolo da marca. Usado no header, no footer, no player e como marca d'água. */
@@ -122,6 +128,41 @@ export const images = {
     width: 800,
     height: 533,
     alt: 'Plateia lotada dançando durante show de Marina & Os Leones no Ver-o-Peso',
+  },
+  /** Capa do vídeo em destaque da página 4 · Vídeos ("Ensaio Aberto #1"). */
+  videoEnsaioAberto: {
+    src: ensaioAberto800,
+    src2x: ensaioAberto1600,
+    width: 800,
+    height: 423,
+    alt: 'Marina & Os Leones tocando durante o Ensaio Aberto #1',
+  },
+
+  /* Reels do Instagram (página 4 · Vídeos). Todos verticais: o recorte é feito
+     por `object-fit: cover` no card, que é mais estreito que o original. */
+  reelEnsaioEstudio: {
+    src: reel1_800,
+    width: 639,
+    height: 820,
+    alt: 'Ensaio aberto no estúdio',
+  },
+  reelBackstage: {
+    src: reel2_800,
+    width: 640,
+    height: 820,
+    alt: 'Backstage do show',
+  },
+  reelSessaoMata: {
+    src: reel3_800,
+    width: 640,
+    height: 818,
+    alt: 'Sessão na mata',
+  },
+  reelTeatroAmazonas: {
+    src: reel4_800,
+    width: 641,
+    height: 818,
+    alt: 'Apresentação no Teatro Amazonas',
   },
 
   /** Imagem grande da página "Sobre". */

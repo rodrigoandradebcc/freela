@@ -45,6 +45,8 @@ export function Footer(): JSX.Element {
                   href={social.href}
                   className={styles.social}
                   aria-label={social.label}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <Icon size={18} />
                   {social.label}

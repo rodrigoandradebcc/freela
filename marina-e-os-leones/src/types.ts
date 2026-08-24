@@ -28,7 +28,10 @@ export interface Track {
   style: string;          // "REGGAE" | "POP ROCK" | "REGGAETON" etc
   durationLabel: string;  // "3:58"
   durationSec: number;    // 238
-  url: string;            // faixa no Spotify — abre em nova aba
+  /** ID da faixa no Spotify: alimenta o link externo E o embed do player. */
+  spotifyId: string;
+  /** Página da faixa no Spotify — abre em nova aba. Derivado de `spotifyId`. */
+  url: string;
 }
 
 /**
@@ -50,6 +53,18 @@ export interface Video {
   image: ImageMeta;
   badge?: string;       // "LANÇAMENTO"
   meta?: string;        // "Show completo · 1h48 · 24 mil visualizações"
+}
+
+/**
+ * Reel do Instagram exibido na página 4 · Vídeos. Não tem duração nem
+ * descrição: o card mostra só a capa, o selo "REELS" e o título, e o clique
+ * leva ao post no Instagram.
+ */
+export interface Reel {
+  id: string;
+  title: string;
+  url: string;
+  image: ImageMeta;
 }
 
 export interface Member {
