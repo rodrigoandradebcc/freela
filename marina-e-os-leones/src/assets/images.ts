@@ -45,7 +45,7 @@ import ml09_800 from './img/ml09-800.webp'
 import showMarina2Member480 from './img/show-marina2-member-480.webp'
 import showVoz800 from './img/show-voz-800.webp'
 import showGuitarra800 from './img/show-guitarra-800.webp'
-import member1Rod800 from './img/member1-rod-800.webp'
+import rodAndrade800 from './img/rod-andrade-800.webp'
 import ensaioAberto800 from './img/ensaio-aberto-800.webp'
 import ensaioAberto1600 from './img/ensaio-aberto-1600.webp'
 import reel1_800 from './img/reel1-800.webp'
@@ -195,9 +195,9 @@ export const images = {
   },
   /** Grade de integrantes — bateria e percussão. */
   memberBateria: {
-    src: member1Rod800,
-    width: 756,
-    height: 740,
+    src: rodAndrade800,
+    width: 800,
+    height: 800,
     alt: 'Rod Andrade, baterista e percussionista de Marina & Os Leones',
   },
 

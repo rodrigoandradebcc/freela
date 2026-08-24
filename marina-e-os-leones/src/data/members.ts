@@ -45,6 +45,6 @@ export const members: MemberData[] = [
     imageKey: 'memberBateria',
     instagram: 'https://www.instagram.com/rod_andrade_____/',
     instagramHandle: '@rod_andrade_____',
-    objectPosition: '50% 50%',
+    objectPosition: '50% 30%',
   },
 ];

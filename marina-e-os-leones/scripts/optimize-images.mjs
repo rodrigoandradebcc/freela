@@ -76,7 +76,7 @@ const JOBS = [
   { source: 'show-marina.png', base: 'show-marina', kind: 'card' },
   { source: 'show-voz.png', base: 'show-voz', kind: 'card' },
   { source: 'show-guitarra.png', base: 'show-guitarra', kind: 'card' },
-  { source: 'member1-rod.png', base: 'member1-rod', kind: 'card' },
+  { source: 'rod-andrade.png', base: 'rod-andrade', kind: 'card' },
 
   // Reels do Instagram (página 4 · Vídeos). NÃO são os reelN.png do design
   // (aqueles são placeholders): a origem é a capa real de cada post, salva de
