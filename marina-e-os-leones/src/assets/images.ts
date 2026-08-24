@@ -45,7 +45,7 @@ import ml09_800 from './img/ml09-800.webp'
 import showMarina2Member480 from './img/show-marina2-member-480.webp'
 import showVoz800 from './img/show-voz-800.webp'
 import showGuitarra800 from './img/show-guitarra-800.webp'
-import member1_800 from './img/member1-800.webp'
+import member1Rod800 from './img/member1-rod-800.webp'
 import ensaioAberto800 from './img/ensaio-aberto-800.webp'
 import ensaioAberto1600 from './img/ensaio-aberto-1600.webp'
 import reel1_800 from './img/reel1-800.webp'
@@ -177,28 +177,28 @@ export const images = {
     src: showMarina2Member480,
     width: 480,
     height: 720,
-    alt: 'Marina, vocalista de Marina & Os Leones, cantando no palco',
+    alt: 'Marina Morais, vocalista de Marina & Os Leones, cantando no palco',
   },
   /** Grade de integrantes — guitarra e voz. */
   memberGuitarraVoz: {
     src: showVoz800,
     width: 800,
     height: 1200,
-    alt: 'Integrante de Marina & Os Leones na guitarra e voz durante apresentação',
+    alt: 'Erick Braga na guitarra e voz durante apresentação de Marina & Os Leones',
   },
   /** Grade de integrantes — baixo. */
   memberBaixo: {
     src: showGuitarra800,
     width: 800,
     height: 1200,
-    alt: 'Integrante de Marina & Os Leones no baixo durante apresentação',
+    alt: 'Flávio QV no baixo durante apresentação de Marina & Os Leones',
   },
   /** Grade de integrantes — bateria e percussão. */
   memberBateria: {
-    src: member1_800,
-    width: 700,
-    height: 900,
-    alt: 'Integrante de Marina & Os Leones na bateria e percussão durante apresentação',
+    src: member1Rod800,
+    width: 756,
+    height: 740,
+    alt: 'Rod Andrade, baterista e percussionista de Marina & Os Leones',
   },
 
   /** Imagem grande da página Mídia Kit. */

@@ -57,6 +57,19 @@
 }
 
 .statusMessage {
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+@starting-style {
+  .statusMessage {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+.statusMessage {
   margin-top: var(--space-1);
   padding: var(--space-4) var(--space-5);
   border-radius: var(--radius-sm);

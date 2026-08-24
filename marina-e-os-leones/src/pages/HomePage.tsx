@@ -20,49 +20,44 @@
  * `imageKey` → `images[key]` acontece aqui, em `resolveImage`.
  */
 
-import type { JSX } from 'react';
+import type { JSX } from "react";
 
-import { images } from '@/assets/images';
-import { ShowCard } from '@/components/agenda/ShowCard';
-import { HeroHome } from '@/components/home/HeroHome';
-import { NextShowBanner } from '@/components/home/NextShowBanner';
-import { DownloadIcon } from '@/components/icons';
-import { NowPlayingCard } from '@/components/music/NowPlayingCard';
-import { TrackList } from '@/components/music/TrackList';
-import { ContactForm } from '@/components/shared/ContactForm';
-import { AppImage } from '@/components/ui/AppImage';
-import { Button } from '@/components/ui/Button';
-import { SectionEyebrow } from '@/components/ui/SectionEyebrow';
-import { TexturedPanel } from '@/components/ui/TexturedPanel';
-import { VideoCard } from '@/components/video/VideoCard';
-import { MEDIA_KIT_HOME_CTA_LABEL } from '@/data/mediaKit';
-import { showsPreview } from '@/data/shows';
-import { ABOUT_TEXT, OPENED_FOR } from '@/data/site';
+import { images } from "@/assets/images";
+import { ShowCard } from "@/components/agenda/ShowCard";
+import { HeroHome } from "@/components/home/HeroHome";
+import { NextShowBanner } from "@/components/home/NextShowBanner";
+import { DownloadIcon } from "@/components/icons";
+import { NowPlayingCard } from "@/components/music/NowPlayingCard";
+import { TrackList } from "@/components/music/TrackList";
+import { ContactForm } from "@/components/shared/ContactForm";
+import { AppImage } from "@/components/ui/AppImage";
+import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/ui/Reveal";
+import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
+import { TexturedPanel } from "@/components/ui/TexturedPanel";
+import { ReelCard } from "@/components/video/ReelCard";
+import { VideoCard } from "@/components/video/VideoCard";
+import { MEDIA_KIT_HOME_CTA_LABEL } from "@/data/mediaKit";
+import { showsPreview } from "@/data/shows";
+import { ABOUT_TEXT, INSTAGRAM_URL, OPENED_FOR } from "@/data/site";
 import {
+  homeReels,
   homeVideoPreviewCaption,
   homeVideoPreviewImageKey,
   homeVideoPreviewTitle,
-  videos,
-} from '@/data/videos';
-import { usePageTitle } from '@/hooks/usePageTitle';
-import type { ImageMeta } from '@/types';
+} from "@/data/videos";
+import { usePageTitle } from "@/hooks/usePageTitle";
+import type { ImageMeta } from "@/types";
 
-import styles from './HomePage.module.css';
+import styles from "./HomePage.module.css";
 
 /** Resolve a `imageKey` de um dado contra o manifesto de imagens. */
 function resolveImage(key: string): ImageMeta {
   return images[key as keyof typeof images];
 }
 
-/**
- * Os dois cards pequenos da grade de vídeos da Home: "Making of do ensaio" e
- * "Leões da Estação". `videos[0]` fica de fora porque o card grande da Home usa
- * outra foto e outra legenda (ver `homeVideoPreview*` em `@/data/videos`).
- */
-const HOME_SMALL_VIDEOS = videos.slice(1, 3);
-
 export default function HomePage(): JSX.Element {
-  usePageTitle('Início');
+  usePageTitle("Início");
 
   return (
     <div className={styles.page}>
@@ -91,16 +86,23 @@ export default function HomePage(): JSX.Element {
         </header>
 
         <div className={styles.showList}>
-          {showsPreview.map((show) => (
-            <ShowCard key={show.id} show={show} variant="preview" />
+          {showsPreview.map((show, index) => (
+            <Reveal key={show.id} index={index}>
+              <ShowCard show={show} variant="preview" />
+            </Reveal>
           ))}
         </div>
       </section>
 
       {/* --- música ------------------------------------------------------ */}
-      <section className={styles.section} aria-labelledby="home-repertoire-title">
+      <section
+        className={styles.section}
+        aria-labelledby="home-repertoire-title"
+      >
         <div className={styles.musicGrid}>
-          <NowPlayingCard variant="home" />
+          <Reveal>
+            <NowPlayingCard variant="home" />
+          </Reveal>
 
           <div className={styles.repertoire}>
             <h2 className={styles.sectionTitle} id="home-repertoire-title">
@@ -113,33 +115,36 @@ export default function HomePage(): JSX.Element {
 
       {/* --- vídeos ------------------------------------------------------ */}
       <section className={styles.section} aria-labelledby="home-videos-title">
-        <h2 className={styles.sectionTitle} id="home-videos-title">
-          Vídeos
-        </h2>
+        <header className={styles.videosHeader}>
+          <h2 className={styles.sectionTitle} id="home-videos-title">
+            Vídeos
+          </h2>
+
+          <Button variant="outline" as="a" href={INSTAGRAM_URL} target="_blank" rel="noreferrer">
+            VER TODOS OS REELS
+          </Button>
+        </header>
 
         <div className={styles.videoGrid}>
-          {/* SIMPLIFICAÇÃO: `VideoCard size="large"` sobrepõe título e duração
-              na base da thumb e ignora `description` (ver VideoCard.tsx) — a
-              legenda "AO VIVO · CIRCUITO REGGAE AMAZÔNIA" fica só no dado.
-              Ela não se perde da tela: é exatamente o texto do card flutuante
-              do hero, logo acima. Passamos a prop mesmo assim para o dia em que
-              a variante large exibir legenda. */}
-          <VideoCard
-            size="large"
-            title={homeVideoPreviewTitle}
-            description={homeVideoPreviewCaption}
-            image={resolveImage(homeVideoPreviewImageKey)}
-          />
-
-          {HOME_SMALL_VIDEOS.map((video) => (
+          <Reveal>
             <VideoCard
-              key={video.id}
-              size="small"
-              title={video.title}
-              duration={video.duration}
-              description={video.description}
-              image={resolveImage(video.imageKey)}
+              size="large"
+              title={homeVideoPreviewTitle}
+              description={homeVideoPreviewCaption}
+              image={resolveImage(homeVideoPreviewImageKey)}
+              href="/videos"
             />
+          </Reveal>
+
+          {homeReels.map((reel, index) => (
+            <Reveal key={reel.id} index={index + 1}>
+              <ReelCard
+                title={reel.title}
+                image={resolveImage(reel.imageKey)}
+                href={reel.url}
+                height="300px"
+              />
+            </Reveal>
           ))}
         </div>
       </section>
@@ -185,52 +190,66 @@ export default function HomePage(): JSX.Element {
       </section>
 
       {/* --- prévia do mídia kit ------------------------------------------ */}
-      <section className={styles.section} aria-labelledby="home-media-kit-title">
+      <section
+        className={styles.section}
+        aria-labelledby="home-media-kit-title"
+      >
         <div className={styles.mediaKitGrid}>
-          <TexturedPanel tone="orange" className={styles.mediaKitPanel}>
-            <SectionEyebrow className={styles.panelEyebrow}>PARA CONTRATANTES</SectionEyebrow>
+          <Reveal>
+            <TexturedPanel tone="orange" className={styles.mediaKitPanel}>
+              <SectionEyebrow className={styles.panelEyebrow}>
+                PARA CONTRATANTES
+              </SectionEyebrow>
 
-            <h2 className={styles.panelTitle} id="home-media-kit-title">
-              Mídia kit &amp; contratação
-            </h2>
+              <h2 className={styles.panelTitle} id="home-media-kit-title">
+                Mídia kit &amp; contratação
+              </h2>
 
-            <p className={styles.panelText}>
-              Release, rider técnico, mapa de palco, fotos em alta e logos: tudo em um pacote
-              único, pronto para a sua produção.
-            </p>
+              <p className={styles.panelText}>
+                Release, rider técnico, mapa de palco, fotos em alta e logos:
+                tudo em um pacote único, pronto para a sua produção.
+              </p>
 
-            {/* Os três botões levam à página Mídia kit, onde ficam os arquivos
+              {/* Os três botões levam à página Mídia kit, onde ficam os arquivos
                 reais e o `href` do release — nada de duplicar lógica de
                 download na Home. */}
-            <div className={styles.panelActions}>
-              <Button variant="dark" as="link" to="/midia-kit" icon={<DownloadIcon />}>
-                {MEDIA_KIT_HOME_CTA_LABEL}
-              </Button>
+              <div className={styles.panelActions}>
+                <Button
+                  variant="dark"
+                  as="link"
+                  to="/midia-kit"
+                  icon={<DownloadIcon />}
+                >
+                  {MEDIA_KIT_HOME_CTA_LABEL}
+                </Button>
 
-              <Button
-                variant="outline"
-                as="link"
-                to="/midia-kit"
-                className={styles.panelOutlineButton}
-              >
-                RIDER TÉCNICO (PDF)
-              </Button>
+                <Button
+                  variant="outline"
+                  as="link"
+                  to="/midia-kit"
+                  className={styles.panelOutlineButton}
+                >
+                  RIDER TÉCNICO (PDF)
+                </Button>
 
-              <Button
-                variant="outline"
-                as="link"
-                to="/midia-kit"
-                className={styles.panelOutlineButton}
-              >
-                FOTOS EM ALTA
-              </Button>
+                <Button
+                  variant="outline"
+                  as="link"
+                  to="/midia-kit"
+                  className={styles.panelOutlineButton}
+                >
+                  FOTOS EM ALTA
+                </Button>
+              </div>
+            </TexturedPanel>
+          </Reveal>
+
+          <Reveal index={1}>
+            <div className={styles.contactCard}>
+              <h3 className={styles.contactTitle}>Fale com a produção</h3>
+              <ContactForm variant="quick" />
             </div>
-          </TexturedPanel>
-
-          <div className={styles.contactCard}>
-            <h3 className={styles.contactTitle}>Fale com a produção</h3>
-            <ContactForm variant="quick" />
-          </div>
+          </Reveal>
         </div>
       </section>
     </div>

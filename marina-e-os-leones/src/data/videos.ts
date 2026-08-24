@@ -96,6 +96,9 @@ export const videos: VideoData[] = [
  * página 4 · Vídeos usa ml05.jpeg com duração/meta para o mesmo título.
  * Mantemos as duas versões e a Home referencia estes valores próprios.
  */
-export const homeVideoPreviewCaption = 'AO VIVO · CIRCUITO REGGAE AMAZÔNIA';
-export const homeVideoPreviewTitle = 'Maré de Igarapé';
-export const homeVideoPreviewImageKey = 'videoFeaturedLarge';
+export const homeVideoPreviewCaption = 'LANÇAMENTO · AO VIVO';
+export const homeVideoPreviewTitle = 'Ensaio Aberto #1';
+export const homeVideoPreviewImageKey = 'videoEnsaioAberto';
+
+/** Os dois Reels que acompanham o destaque na Home. */
+export const homeReels = reels.slice(0, 2);

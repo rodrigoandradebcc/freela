@@ -1,12 +1,6 @@
 /**
  * Formação — seção "Quem sobe no palco" da tela 5 · Sobre.
  *
- * Nota do design original (legenda logo abaixo da grade de integrantes):
- * "Fotos ao vivo no Bosque Shopping (13.09.2025). Nomes e instrumentos supostos
- * — me manda a formação que eu ajusto."
- * Ou seja, tudo exceto "Marina" é placeholder. Preservado como está; ajustar
- * quando o cliente enviar a formação real.
- *
  * DECISÃO DE TIPO: `Member` em `src/types.ts` exige `image: ImageMeta`, que só
  * existe no manifesto gerado (`src/assets/images.ts`, outra etapa). Exportamos
  * dados crus com `imageKey: string`; a etapa de páginas faz o join.
@@ -17,23 +11,40 @@ import type { Member } from '@/types';
 export type MemberData = Omit<Member, 'image'> & { imageKey: string };
 
 export const members: MemberData[] = [
-  { id: 'marina', name: 'Marina', role: 'VOZ', imageKey: 'memberMarina' },
   {
-    id: 'integrante-1',
-    name: 'Integrante',
+    id: 'marina-morais',
+    name: 'Marina Morais',
+    role: 'VOZ',
+    imageKey: 'memberMarina',
+    instagram: 'https://www.instagram.com/mariinamorais/',
+    instagramHandle: '@mariinamorais',
+    objectPosition: '50% 14%',
+  },
+  {
+    id: 'erick-braga',
+    name: 'Erick Braga',
     role: 'GUITARRA E VOZ',
     imageKey: 'memberGuitarraVoz',
+    instagram: 'https://www.instagram.com/erick_braga/',
+    instagramHandle: '@erick_braga',
+    objectPosition: '50% 16%',
   },
   {
-    id: 'integrante-2',
-    name: 'Integrante',
+    id: 'flavio-qv',
+    name: 'Flávio QV',
     role: 'BAIXO',
     imageKey: 'memberBaixo',
+    instagram: 'https://www.instagram.com/flavioqv/',
+    instagramHandle: '@flavioqv',
+    objectPosition: '50% 30%',
   },
   {
-    id: 'integrante-3',
-    name: 'Integrante',
+    id: 'rod-andrade',
+    name: 'Rod Andrade',
     role: 'BATERIA E PERCUSSÃO',
     imageKey: 'memberBateria',
+    instagram: 'https://www.instagram.com/rod_andrade_____/',
+    instagramHandle: '@rod_andrade_____',
+    objectPosition: '50% 50%',
   },
 ];

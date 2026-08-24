@@ -1,0 +1,23 @@
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
+  transition-delay: calc(var(--reveal-index, 0) * 60ms);
+}
+
+.shown {
+  opacity: 1;
+  transform: none;
+}
+
+/* Rede de segurança: o bloco global de prefers-reduced-motion (global.css) zera
+   a DURAÇÃO da transição, não o estado inicial. Sem esta regra, quem tem
+   redução de movimento veria o conteúdo escondido até o efeito rodar. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

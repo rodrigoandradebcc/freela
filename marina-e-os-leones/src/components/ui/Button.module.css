@@ -22,7 +22,12 @@
   transition:
     background-color var(--duration-fast) var(--ease-out),
     border-color var(--duration-fast) var(--ease-out),
-    color var(--duration-fast) var(--ease-out);
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-press) var(--ease-out);
+}
+
+.button:active:not(:disabled):not([aria-disabled='true']) {
+  transform: scale(0.97);
 }
 
 /* `:focus-visible` vem do global.css — não redefinir aqui. */

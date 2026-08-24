@@ -41,6 +41,31 @@
   color: var(--color-accent-text);
 }
 
+.instagram {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 34px;
+  margin-top: var(--space-3);
+  padding: 9px 15px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-bg);
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.instagram:hover {
+  background-color: var(--color-accent);
+  color: var(--color-text-on-dark);
+}
+
 @media (min-width: 768px) {
   .photo {
     height: 280px;

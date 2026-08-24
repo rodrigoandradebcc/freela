@@ -60,6 +60,9 @@ export interface Member {
   name: string;
   role: string;
   image: ImageMeta;
+  instagram?: string;
+  instagramHandle?: string;
+  objectPosition?: string;
 }
 
 export type IconName =

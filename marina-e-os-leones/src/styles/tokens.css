@@ -142,8 +142,10 @@
 
   /* --- motion -------------------------------------------------------------- */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-press: 160ms;
   --duration-fast: 150ms;
   --duration-base: 250ms;
+  --duration-slow: 400ms;
 
   /* --- z-index scale --------------------------------------------------------
      Nada fora desta escala. Header e tab bar coexistem no mesmo nível (nunca

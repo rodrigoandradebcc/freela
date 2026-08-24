@@ -8,20 +8,61 @@
   background: none;
   overflow: auto;
   overscroll-behavior: contain;
+  opacity: 0;
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    overlay var(--duration-base) allow-discrete,
+    display var(--duration-base) allow-discrete;
+}
+
+.dialog[open] {
+  opacity: 1;
+}
+
+@starting-style {
+  .dialog[open] {
+    opacity: 0;
+  }
 }
 
 .dialog::backdrop {
+  background-color: rgba(32, 30, 29, 0);
+  transition:
+    background-color var(--duration-base) var(--ease-out),
+    overlay var(--duration-base) allow-discrete,
+    display var(--duration-base) allow-discrete;
+}
+
+.dialog[open]::backdrop {
   background-color: rgba(32, 30, 29, 0.72);
+}
+
+@starting-style {
+  .dialog[open]::backdrop {
+    background-color: rgba(32, 30, 29, 0);
+  }
 }
 
 .panel {
   position: relative;
+  transform: scale(0.96);
+  transition: transform var(--duration-base) var(--ease-out);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-4);
   width: min(400px, 100%);
   margin: auto;
+}
+
+.dialog[open] .panel {
+  transform: scale(1);
+}
+
+@starting-style {
+  .dialog[open] .panel {
+    transform: scale(0.96);
+  }
 }
 
 .close {

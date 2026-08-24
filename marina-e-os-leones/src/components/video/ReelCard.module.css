@@ -20,13 +20,13 @@
 .image {
   display: block;
   width: 100%;
-  height: 340px;
+  height: var(--reel-height, 340px);
   object-fit: cover;
 }
 
 @media (min-width: 1024px) {
   .image {
-    height: 420px;
+    height: var(--reel-height, 420px);
   }
 }
 

@@ -21,7 +21,7 @@
  */
 
 import type { JSX } from 'react';
-import { useId, useState } from 'react';
+import { useId, useState, type CSSProperties } from 'react';
 
 import { RegionFilter } from '@/components/agenda/RegionFilter';
 import type { RegionFilterValue } from '@/components/agenda/RegionFilter';
@@ -81,10 +81,18 @@ export default function AgendaPage(): JSX.Element {
           {visibleShows.length} de {showsFull.length} datas em exibição.
         </p>
 
+        {/* `key={filter}` remonta a lista a cada troca de filtro: é o que faz a
+            animação de entrada rodar de novo, e não só na primeira vez. */}
         {visibleShows.length > 0 ? (
-          <div className={styles.list}>
-            {visibleShows.map((show) => (
-              <ShowCard key={show.id} show={show} variant="full" />
+          <div className={styles.list} key={filter}>
+            {visibleShows.map((show, index) => (
+              <div
+                key={show.id}
+                className={styles.listItem}
+                style={{ '--enter-index': index } as CSSProperties}
+              >
+                <ShowCard show={show} variant="full" />
+              </div>
             ))}
           </div>
         ) : (

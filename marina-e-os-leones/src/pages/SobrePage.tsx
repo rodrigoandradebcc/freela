@@ -72,14 +72,17 @@ export default function SobrePage(): JSX.Element {
                   name={member.name}
                   role={member.role}
                   image={images[member.imageKey as keyof typeof images]}
+                  instagram={member.instagram}
+                  instagramHandle={member.instagramHandle}
+                  objectPosition={member.objectPosition}
                 />
               </li>
             ))}
           </ul>
 
           <p className={styles.membersNote}>
-            Fotos ao vivo no Bosque Shopping (13.09.2025). Nomes e instrumentos supostos; em
-            atualização conforme a formação oficial.
+            Fotos ao vivo no Bosque Shopping (13.09.2025). Confirme quem toca o quê e eu troco os
+            instrumentos.
           </p>
         </div>
       </section>

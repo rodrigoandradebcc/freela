@@ -13,7 +13,7 @@
  * `className`. `cinematic` liga o tratamento fotográfico global `.img-cinematic`.
  */
 
-import type { JSX } from 'react';
+import type { CSSProperties, JSX } from 'react';
 
 import type { ImageMeta } from '@/types';
 
@@ -27,6 +27,7 @@ export interface AppImageProps {
   /** Aplica o tratamento fotográfico `.img-cinematic` (global.css). */
   cinematic?: boolean;
   className?: string;
+  style?: CSSProperties;
 }
 
 export function AppImage({
@@ -36,6 +37,7 @@ export function AppImage({
   sizes,
   cinematic = false,
   className,
+  style,
 }: AppImageProps): JSX.Element {
   const classes = [className, cinematic ? 'img-cinematic' : null].filter(Boolean).join(' ');
 
@@ -51,6 +53,7 @@ export function AppImage({
       decoding="async"
       sizes={sizes}
       className={classes || undefined}
+      style={style}
     />
   );
 }

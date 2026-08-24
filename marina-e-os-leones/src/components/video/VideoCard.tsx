@@ -16,7 +16,8 @@
  * heading dentro do link duplicaria o mesmo texto na navegação por títulos.
  */
 
-import type { JSX, MouseEvent } from 'react';
+import type { JSX, MouseEvent, ReactNode } from 'react';
+import { Link } from 'react-router';
 
 import { PlayIcon } from '@/components/icons';
 import { AppImage } from '@/components/ui/AppImage';
@@ -30,6 +31,8 @@ export interface VideoCardProps {
   description?: string;
   image: ImageMeta;
   size: 'large' | 'small';
+  /** Rota interna ("/videos") ou URL externa. Sem ela o card não navega. */
+  href?: string;
 }
 
 export function VideoCard({
@@ -38,6 +41,7 @@ export function VideoCard({
   description,
   image,
   size,
+  href,
 }: VideoCardProps): JSX.Element {
   const isLarge = size === 'large';
 
@@ -46,13 +50,41 @@ export function VideoCard({
     event.preventDefault();
   }
 
-  return (
-    <a
-      href="#"
-      className={[styles.card, isLarge ? styles.large : styles.small].join(' ')}
-      aria-label={`Assistir: ${title}`}
-      onClick={handleClick}
-    >
+  const className = [styles.card, isLarge ? styles.large : styles.small].join(' ');
+  const label = `Assistir: ${title}`;
+
+  const wrap = (children: ReactNode): JSX.Element => {
+    if (href?.startsWith('/')) {
+      return (
+        <Link to={href} className={className} aria-label={label}>
+          {children}
+        </Link>
+      );
+    }
+
+    if (href) {
+      return (
+        <a
+          href={href}
+          className={className}
+          aria-label={label}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {children}
+        </a>
+      );
+    }
+
+    return (
+      <a href="#" className={className} aria-label={label} onClick={handleClick}>
+        {children}
+      </a>
+    );
+  };
+
+  return wrap(
+    <>
       <div className={styles.media}>
         <AppImage image={image} cinematic className={styles.image} />
 
@@ -64,6 +96,7 @@ export function VideoCard({
 
         {isLarge ? (
           <span className={styles.largeFooter}>
+            {description ? <span className={styles.largeKicker}>{description}</span> : null}
             <span className={styles.largeTitle}>{title}</span>
             {duration ? <span className={styles.largeDuration}>{duration}</span> : null}
           </span>
@@ -78,6 +111,6 @@ export function VideoCard({
           {description ? <span className={styles.description}>{description}</span> : null}
         </div>
       )}
-    </a>
+    </>,
   );
 }

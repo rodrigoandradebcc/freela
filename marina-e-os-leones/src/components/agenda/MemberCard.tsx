@@ -13,6 +13,7 @@
 
 import type { JSX } from 'react';
 
+import { SocialInstagramIcon } from '@/components/icons';
 import { AppImage } from '@/components/ui/AppImage';
 import type { ImageMeta } from '@/types';
 
@@ -22,15 +23,43 @@ export interface MemberCardProps {
   name: string;
   role: string;
   image: ImageMeta;
+  instagram?: string;
+  instagramHandle?: string;
+  objectPosition?: string;
 }
 
-export function MemberCard({ name, role, image }: MemberCardProps): JSX.Element {
+export function MemberCard({
+  name,
+  role,
+  image,
+  instagram,
+  instagramHandle,
+  objectPosition,
+}: MemberCardProps): JSX.Element {
   return (
     <article className={styles.card}>
-      <AppImage image={image} cinematic className={styles.photo} />
+      <AppImage
+        image={image}
+        cinematic
+        className={styles.photo}
+        style={objectPosition ? { objectPosition } : undefined}
+      />
       <div className={styles.body}>
         <h3 className={styles.name}>{name}</h3>
         <p className={styles.role}>{role}</p>
+
+        {instagram ? (
+          <a
+            className={styles.instagram}
+            href={instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Instagram de ${name}`}
+          >
+            <SocialInstagramIcon size={14} />
+            {instagramHandle ?? 'Instagram'}
+          </a>
+        ) : null}
       </div>
     </article>
   );

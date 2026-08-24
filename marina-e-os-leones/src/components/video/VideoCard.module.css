@@ -74,6 +74,18 @@
   padding: var(--space-4);
 }
 
+.largeKicker {
+  display: block;
+  margin-bottom: 10px;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-peach-light);
+}
+
 .largeTitle {
   min-width: 0;
   font-family: var(--font-display);
