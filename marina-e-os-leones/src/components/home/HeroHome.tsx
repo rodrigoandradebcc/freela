@@ -23,13 +23,12 @@
 import type { JSX } from 'react';
 
 import { images } from '@/assets/images';
-import { PauseIcon, PlayIcon } from '@/components/icons';
+import { PlayIcon } from '@/components/icons';
 import { AppImage } from '@/components/ui/AppImage';
 import { Button } from '@/components/ui/Button';
 import { SectionEyebrow } from '@/components/ui/SectionEyebrow';
 import { Stat } from '@/components/ui/Stat';
 import { HERO, HOME_STATS } from '@/data/site';
-import { usePlayer } from '@/player/PlayerContext';
 
 import styles from './HeroHome.module.css';
 
@@ -43,8 +42,6 @@ import styles from './HeroHome.module.css';
 const [titleLineOne, titleLineTwo, titleLineThree, titleAccent, titleTail] = HERO.titleParts;
 
 export function HeroHome(): JSX.Element {
-  const { playing, toggle } = usePlayer();
-
   return (
     <section className={styles.hero}>
       <div className={styles.copy}>
@@ -66,12 +63,11 @@ export function HeroHome(): JSX.Element {
           <Button variant="dark" as="link" to="/agenda">
             VER AGENDA
           </Button>
-          <Button
-            variant="outline"
-            icon={playing ? <PauseIcon /> : <PlayIcon />}
-            onClick={toggle}
-          >
-            {playing ? 'PAUSAR' : 'OUVIR'}
+          {/* O player é o embed do Spotify, que só toca por gesto DENTRO do
+              iframe (cross-origin). Então este botão leva até ele em vez de
+              fingir um play que o navegador bloquearia. */}
+          <Button variant="outline" as="link" to="/musica" icon={<PlayIcon />}>
+            OUVIR
           </Button>
         </div>
 
