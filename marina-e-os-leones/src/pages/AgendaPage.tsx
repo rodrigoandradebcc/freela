@@ -81,8 +81,6 @@ export default function AgendaPage(): JSX.Element {
           {visibleShows.length} de {showsFull.length} datas em exibição.
         </p>
 
-        {/* `key={filter}` remonta a lista a cada troca de filtro: é o que faz a
-            animação de entrada rodar de novo, e não só na primeira vez. */}
         {visibleShows.length > 0 ? (
           <div className={styles.list} key={filter}>
             {visibleShows.map((show, index) => (

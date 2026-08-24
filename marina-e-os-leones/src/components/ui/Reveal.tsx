@@ -1,18 +1,3 @@
-/**
- * Reveal — entrada suave quando o bloco chega à viewport.
- *
- * O bloco nasce ESCONDIDO, já na primeira renderização. Aplicar o estado
- * escondido depois (dentro do efeito) não funciona: o observer dispara no mesmo
- * tick para quem já está na viewport, o navegador nunca pinta o frame inicial e
- * a transição não roda.
- *
- * Dispara uma vez por elemento (o observer se desconecta no primeiro
- * cruzamento): reanimar a cada rolagem cansa em quem sobe e desce a página.
- *
- * `prefers-reduced-motion` ou `IntersectionObserver` indisponível → revela na
- * hora, no primeiro efeito. O conteúdo nunca fica preso em `opacity: 0`.
- */
-
 import { useEffect, useRef, useState, type CSSProperties, type JSX, type ReactNode } from 'react';
 
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
@@ -21,7 +6,6 @@ import styles from './Reveal.module.css';
 
 export interface RevealProps {
   children: ReactNode;
-  /** Posição do bloco numa sequência: multiplica o atraso (60ms por passo). */
   index?: number;
   className?: string;
 }

@@ -111,9 +111,6 @@
   gap: 14px;
 }
 
-/* Entrada escalonada ao trocar o filtro. `both` mantém o estado inicial antes
-   do delay, senão o item pisca visível e só então some para animar. O bloco
-   global de `prefers-reduced-motion` (global.css) já zera a duração. */
 .listItem {
   animation: enterUp var(--duration-base) var(--ease-out) both;
   animation-delay: calc(var(--enter-index, 0) * 40ms);
