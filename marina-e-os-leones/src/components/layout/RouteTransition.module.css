@@ -1,10 +1,10 @@
 .route {
-  animation: routeEnter 220ms var(--ease-out) both;
+  animation: routeEnter 320ms var(--ease-out) both;
 }
 
 @keyframes routeEnter {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(16px) scale(0.995);
   }
 }

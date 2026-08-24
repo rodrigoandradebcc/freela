@@ -27,7 +27,11 @@
   display: flex;
   flex: 0 0 auto;
   align-items: center;
-  gap: var(--space-3);
+  /* `mark.webp` e `wordmark.webp` trazem margem transparente embutida (16,7%
+     à direita do símbolo, 18,3% à esquerda do wordmark). Sem compensar, o vão
+     ÓPTICO vira ~39px mesmo com `gap: 12px`. Os negativos abaixo descontam essa
+     folga; o `gap` passa a valer o espaço que se vê. */
+  gap: 10px;
   /* Alvo de toque mínimo (WCAG 2.5.8). As imagens somam 35px de altura no
      mobile e 42px no desktop; sem isto o link ficava abaixo do piso. Não muda
      o layout: o CTA ao lado já tem 44px, então a linha do header já tinha essa
@@ -39,11 +43,13 @@
 .logoMark {
   width: 36px;
   height: auto;
+  margin-right: -6px;
 }
 
 .logoWordmark {
   width: 116px;
   height: auto;
+  margin-left: -21px;
 }
 
 /* --- lados direitos: um para mobile, outro para desktop --------------------
@@ -114,10 +120,12 @@
 
   .logoMark {
     width: 44px;
+    margin-right: -7px;
   }
 
   .logoWordmark {
     width: 140px;
+    margin-left: -26px;
   }
 
   .mobileActions {
