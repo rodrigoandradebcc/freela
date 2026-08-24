@@ -239,8 +239,6 @@
 }
 
 @media (min-width: 768px) {
-  /* 38px é a medida do painel no design — fora da escala 4/8pt, como o 34px do
-     .contactCard ao lado. Não é o recuo de seção (--space-section-x). */
   .mediaKitPanel {
     padding: 38px;
   }

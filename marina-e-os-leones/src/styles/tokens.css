@@ -138,10 +138,6 @@
      aplicação — nunca redeclare 44px literal, sempre referencie este token). */
   --space-section-x: 44px;
 
-  /* Largura máxima do container. É a largura da prancheta do design (1280px):
-     com --space-section-x dos dois lados o conteúdo fica em 1192px, que é a
-     medida em que a escala de tipo (--text-display-*) foi calibrada. Header,
-     Footer e todas as páginas usam este token — nunca 1200px literal. */
   --container-max: 1280px;
 
   /* --- motion -------------------------------------------------------------- */

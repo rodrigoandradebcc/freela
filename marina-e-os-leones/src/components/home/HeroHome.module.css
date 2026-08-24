@@ -10,10 +10,6 @@
 }
 
 @media (min-width: 1024px) {
-  /* SEM `gap`: no design as duas colunas se encostam e a foto começa
-     exatamente no meio do hero. O respiro entre texto e foto vem do
-     `padding-right` da coluna de texto, não da grade — é o que faz o meio da
-     grade coincidir com a borda da foto, onde o card "AO VIVO" é ancorado. */
   .hero {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 0;
@@ -95,8 +91,6 @@
   background-color: var(--color-bg-alt);
 }
 
-/* `object-position` do design: o corte sobe (24% em vez de 50%) para manter os
-   quatro rostos enquadrados quando a coluna fica alta e estreita. */
 .heroImage {
   width: 100%;
   height: 100%;
@@ -119,9 +113,6 @@
 
 /* --- card flutuante "AO VIVO" --------------------------------------------- */
 
-/* Mobile: o card mora dentro da foto, encostado no canto inferior esquerdo.
-   O 24px do raio é a medida do design (fora da escala de --radius-*, como o
-   34px do card de contato da Home). */
 .showCard {
   position: absolute;
   left: var(--space-4);
@@ -142,10 +133,6 @@
   }
 }
 
-/* Desktop: o card senta A CAVALO na borda esquerda da foto — metade sobre a
-   foto, metade sobre o creme. `.mediaColumn` começa no meio do hero (a grade
-   não tem gap), então `left: 0` + `translateX(-50%)` reproduz o `left: 50%` do
-   design, que é ancorado no hero inteiro. */
 @media (min-width: 1024px) {
   .showCard {
     left: 0;
@@ -156,10 +143,6 @@
   }
 }
 
-/* Paisagem (244 × 188 no tamanho do design), NÃO retrato: a proporção é a
-   mesma em qualquer largura do card. `object-position` desloca o corte para a
-   direita e para cima, como no design — é o que mantém a Marina centralizada
-   no recorte. */
 .showCardImage {
   width: 100%;
   height: auto;

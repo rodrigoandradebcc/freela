@@ -2,8 +2,7 @@
  * HeroHome — bloco de abertura da Home (tela 1 do design).
  *
  * Sem props: todo o conteúdo é fixo e vem de `@/data/site` (`HERO`,
- * `HOME_STATS`) e do manifesto de imagens. O único estado é o do player
- * global, para o botão OUVIR/PAUSAR.
+ * `HOME_STATS`) e do manifesto de imagens.
  *
  * Layout mobile-first: coluna única (texto → imagem) e, a partir de 1024px,
  * duas colunas lado a lado com a imagem esticando na altura do texto.
@@ -63,9 +62,6 @@ export function HeroHome(): JSX.Element {
           <Button variant="dark" as="link" to="/agenda">
             VER AGENDA
           </Button>
-          {/* O player é o embed do Spotify, que só toca por gesto DENTRO do
-              iframe (cross-origin). Então este botão leva até ele em vez de
-              fingir um play que o navegador bloquearia. */}
           <Button variant="outline" as="link" to="/musica" icon={<PlayIcon />}>
             OUVIR
           </Button>

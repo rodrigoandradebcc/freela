@@ -32,12 +32,13 @@
  * real disponível — só não é mais usado nesta seção.
  */
 
-import type { JSX } from 'react';
+import { useState, type JSX } from 'react';
 
 import { images } from '@/assets/images';
 import { Button } from '@/components/ui/Button';
 import { SectionEyebrow } from '@/components/ui/SectionEyebrow';
 import { ReelCard } from '@/components/video/ReelCard';
+import { ReelLightbox } from '@/components/video/ReelLightbox';
 import { YoutubeEmbed } from '@/components/video/YoutubeEmbed';
 import { featuredVideo, reels } from '@/data/videos';
 import { CHANNEL_URL, INSTAGRAM_URL } from '@/data/site';
@@ -53,6 +54,9 @@ function imageFor(key: string): ImageMeta {
 
 export default function VideosPage(): JSX.Element {
   usePageTitle('Vídeos');
+
+  const [openReelId, setOpenReelId] = useState<string | null>(null);
+  const openReel = reels.find((reel) => reel.id === openReelId) ?? null;
 
   return (
     <div className={styles.page}>
@@ -120,12 +124,21 @@ export default function VideosPage(): JSX.Element {
             <ReelCard
               key={reel.id}
               title={reel.title}
-              url={reel.url}
               image={imageFor(reel.imageKey)}
+              onOpen={() => setOpenReelId(reel.id)}
             />
           ))}
         </div>
       </section>
+
+      {openReel ? (
+        <ReelLightbox
+          key={openReel.id}
+          title={openReel.title}
+          url={openReel.url}
+          onClose={() => setOpenReelId(null)}
+        />
+      ) : null}
     </div>
   );
 }

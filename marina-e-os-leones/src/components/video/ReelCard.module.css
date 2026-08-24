@@ -7,6 +7,10 @@
 .card {
   position: relative;
   display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  text-align: left;
   overflow: hidden;
   /* 26px é a medida do design — um degrau abaixo do --radius-lg (28px) usado
      nos painéis grandes, porque o card é estreito. */
