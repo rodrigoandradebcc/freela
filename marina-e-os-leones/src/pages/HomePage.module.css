@@ -1,0 +1,314 @@
+/* HomePage.module.css — layout da tela 1 (Home).
+
+   MOBILE-FIRST: a base é sempre uma coluna só; as grades de duas/três colunas
+   entram em `min-width: 768px` e `min-width: 1024px`, nunca com `max-width`.
+
+   CONTAINER (convenção desta página): `.section` centra o conteúdo em 1200px e
+   aplica o padding horizontal padrão — 20px na base, 44px a partir de 1024px.
+   Toda seção nova deve reusar `.section`; o espaçamento vertical entre elas é o
+   `margin-bottom` dele, para não somar margens divergentes seção a seção.
+
+   Cores, raios e tempos vêm de tokens.css. Os poucos px literais aqui são
+   medidas de layout do design (gaps e paddings de bloco) que não têm token. */
+
+.page {
+  padding-bottom: var(--space-12);
+}
+
+.section {
+  max-width: 1200px;
+  margin: 0 auto 48px;
+  padding: 0 20px;
+}
+
+@media (min-width: 1024px) {
+  .section {
+    margin-bottom: 62px;
+    padding: 0 var(--space-section-x);
+  }
+}
+
+/* --- hero ------------------------------------------------------------------
+   HeroHome não tem padding próprio (ver HeroHome.module.css): o container é
+   responsabilidade da página.
+
+   No desktop a coluna da direita do hero é feita para sangrar até a borda do
+   viewport — por isso o padding-right cai a 0 e o padding-left passa a alinhar
+   o texto com o conteúdo das outras seções. O alinhamento usa
+   `max(44px, calc((100% - 1200px) / 2 + 44px))` e NÃO `100vw`: `vw` inclui a
+   largura da barra de rolagem clássica (Windows/Linux) e criaria scroll
+   horizontal de alguns pixels. */
+.heroSection {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-6) 20px 0;
+}
+
+@media (min-width: 1024px) {
+  .heroSection {
+    max-width: none;
+    padding: var(--space-10) 0 0
+      max(var(--space-section-x), calc((100% - 1200px) / 2 + var(--space-section-x)));
+  }
+}
+
+/* --- banner "próximo show" ------------------------------------------------- */
+
+.bannerSection {
+  max-width: 1200px;
+  margin: 40px auto 56px;
+  padding: 0 20px;
+}
+
+@media (min-width: 1024px) {
+  .bannerSection {
+    margin: 56px auto 62px;
+    padding: 0 var(--space-section-x);
+  }
+}
+
+/* --- cabeçalho de seção ---------------------------------------------------- */
+
+/* Base empilhada (eyebrow + título, depois o CTA). A partir de 768px o CTA vai
+   para a ponta direita, alinhado pela base do título. */
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-5);
+  margin-bottom: var(--space-6);
+}
+
+.sectionHeading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .sectionHeader {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-8);
+  }
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-display-md);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--color-text);
+}
+
+/* --- prévia da agenda ------------------------------------------------------ */
+
+.showList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* --- música ---------------------------------------------------------------- */
+
+.musicGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+}
+
+/* `minmax(0, 1fr)` em vez de `1fr`: sem isso o conteúdo mais largo (linhas do
+   repertório) impede a coluna de encolher e vaza para fora da grade. */
+@media (min-width: 1024px) {
+  .musicGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    gap: var(--space-10);
+  }
+}
+
+.repertoire {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+/* --- vídeos ---------------------------------------------------------------- */
+
+/* Base: uma coluna. A partir de 768px, o card grande à esquerda e os dois
+   pequenos à direita, como no design. */
+.videoGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .videoGrid {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+}
+
+/* --- prévia do "Sobre" ----------------------------------------------------- */
+
+.aboutGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-8);
+}
+
+@media (min-width: 1024px) {
+  .aboutGrid {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: var(--space-12);
+  }
+}
+
+/* A foto do manifesto é retrato (800x1017); o recorte 4/5 mantém a altura
+   controlada nas duas colunas sem esticar a imagem. */
+.aboutImage {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  background-color: var(--color-bg-alt);
+}
+
+.aboutCopy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.aboutParagraph {
+  max-width: 62ch;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+}
+
+/* Chips de "abriram shows de". Fundo `--color-bg-alt` (e não `--color-bg`, que
+   é a própria cor do fundo da página — a pill sumiria). */
+.artistTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.artistTag {
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-bg-alt);
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  color: var(--color-text-secondary);
+}
+
+/* --- prévia do mídia kit --------------------------------------------------- */
+
+.mediaKitGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .mediaKitGrid {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    align-items: start;
+    gap: var(--space-8);
+  }
+}
+
+/* TexturedPanel não traz padding: é decisão de quem usa (ver TexturedPanel.tsx). */
+.mediaKitPanel {
+  padding: var(--space-8) var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .mediaKitPanel {
+    padding: var(--space-section-x);
+  }
+}
+
+/* O eyebrow padrão é escuro (--color-text-tertiary) e sumiria no marrom. */
+.panelEyebrow {
+  color: var(--color-peach);
+}
+
+.panelTitle {
+  margin-top: var(--space-4);
+  font-family: var(--font-display);
+  font-size: var(--text-display-md);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--color-peach-pale);
+}
+
+.panelText {
+  max-width: 46ch;
+  margin-top: var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--color-peach);
+}
+
+.panelActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+/* A variante `outline` do Button é feita para fundo claro (borda escura +
+   texto --color-text): sobre o marrom do painel ela ficaria ilegível. Aqui a
+   pill vira clara. O seletor descendente é proposital — dois níveis garantem
+   especificidade maior que `.outline` / `.outline:hover` do Button.module.css
+   independentemente da ordem em que os CSS modules forem injetados. */
+.mediaKitPanel .panelOutlineButton {
+  border-color: rgba(249, 244, 237, 0.5);
+  color: var(--color-peach-pale);
+}
+
+.mediaKitPanel .panelOutlineButton:hover {
+  border-color: var(--color-peach-pale);
+  background-color: rgba(249, 244, 237, 0.12);
+  color: var(--color-peach-pale);
+}
+
+/* --- card de contato ------------------------------------------------------- */
+
+.contactCard {
+  padding: var(--space-8) var(--space-6);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-cream-card);
+}
+
+@media (min-width: 768px) {
+  .contactCard {
+    padding: 34px;
+  }
+}
+
+.contactTitle {
+  margin-bottom: var(--space-5);
+  font-family: var(--font-display);
+  font-size: var(--text-display-sm);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--color-text);
+}

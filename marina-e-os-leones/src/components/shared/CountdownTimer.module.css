@@ -1,0 +1,99 @@
+/* CountdownTimer.module.css — grade de 4 blocos da contagem regressiva.
+   Desenhado para viver DENTRO de um painel verde (TexturedPanel tone="green"),
+   por isso as cores claras. */
+
+.timer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.grid {
+  display: flex;
+  gap: var(--space-2);
+}
+
+/* `flex: 0 1 88px` em vez de `width: 88px`: os 4 blocos + gaps somam 376px e
+   estourariam um viewport de 360px. Assim eles encolhem no celular estreito e
+   travam em 88px assim que houver espaço. */
+.block {
+  flex: 0 1 88px;
+  min-width: 0;
+  padding: var(--space-4) var(--space-1);
+  border-radius: var(--radius-md);
+  text-align: center;
+  /* Véu translúcido sobre o verde do painel; não existe token para o alpha.
+     E14 (a11y): era um véu CLARO, rgba(240, 250, 225, 0.12). Ele clareava o
+     verde exatamente onde o rótulo de 10px se apoia — o fundo efetivo virava
+     #7c8867 e o rótulo caía para 3,10:1, o pior contraste do site. Nenhuma cor
+     clara salvava o bloco (nem --color-green-lighter, 3,49:1), e reduzir o
+     alpha até passar apagaria o bloco por completo.
+     Invertido para um véu ESCURO de mesma translucidez: o bloco continua sendo
+     uma superfície destacada dentro do painel (agora rebaixada, não elevada) e
+     o fundo efetivo vai a #545e41 — rótulo 5,67:1 e número 6,37:1. */
+  background: rgba(32, 30, 29, 0.18);
+}
+
+/* Último bloco (segundos): destaque sólido laranja, como no design original. */
+.blockAccent {
+  background: var(--color-accent);
+}
+
+.value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 38px;
+  font-weight: 400;
+  line-height: 1;
+  /* Impede que a largura "pule" a cada tick (1 é mais estreito que 8). */
+  font-variant-numeric: tabular-nums;
+  color: var(--color-green-lighter);
+}
+
+.blockAccent .value {
+  /* Sobre laranja o verde-claro sumiria; branco quente passa AA para texto
+     grande (>=24px) sobre --color-accent. */
+  color: var(--color-text-on-dark);
+}
+
+.label {
+  display: block;
+  margin-top: var(--space-1);
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-green-light);
+}
+
+/* O rótulo é texto PEQUENO: em branco sobre --color-accent ele reprovaria em
+   AA (3.3:1). O escuro sobre o mesmo laranja passa (4.6:1), então o bloco de
+   segundos inverte só o rótulo. */
+.blockAccent .label {
+  color: var(--color-dark);
+}
+
+/* --- estado expirado ------------------------------------------------------ */
+
+.expired {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.expiredText {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--color-green-lighter);
+}
+
+@media (min-width: 768px) {
+  .grid {
+    gap: var(--space-3);
+  }
+}

@@ -1,0 +1,124 @@
+/* AgendaPage.module.css — página 2 · Agenda.
+
+   Mobile-first (convenção do global.css): a base é o layout de 360–767px e só
+   crescemos a partir de `min-width`. O respiro lateral da página segue a mesma
+   convenção das demais telas — 20px na base, 44px a partir de 1024px. */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-8) 20px var(--space-12);
+}
+
+@media (min-width: 1024px) {
+  .page {
+    gap: var(--space-12);
+    padding: var(--space-10) var(--space-section-x) 72px;
+  }
+}
+
+/* --- hero ------------------------------------------------------------------
+   `overflow: hidden` existe para recortar o blob decorativo que sangra pelo
+   canto superior direito; sem ele o círculo criaria scroll horizontal.
+
+   O efeito colateral do recorte é cortar o anel de foco (`:focus-visible` =
+   3px + 2px de offset) dos botões do filtro encostados na borda. Por isso o
+   hero abre 8px de folga interna e devolve os mesmos 8px em margem negativa:
+   o conteúdo continua alinhado com o resto da página e o anel cabe inteiro. */
+.hero {
+  position: relative;
+  overflow: hidden;
+  margin: 0 calc(var(--space-2) * -1);
+  padding: 0 var(--space-2) var(--space-4);
+}
+
+/* Decorativo e sem `z-index`: como vem antes de `.heroInner` (também
+   posicionado) no DOM, é pintado atrás dele. */
+.heroBlob {
+  top: -100px;
+  right: -110px;
+  width: 280px;
+  height: 280px;
+}
+
+@media (min-width: 768px) {
+  .heroBlob {
+    top: -120px;
+    right: -130px;
+    width: 380px;
+    height: 380px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroBlob {
+    top: -140px;
+    right: -140px;
+    width: 460px;
+    height: 460px;
+  }
+}
+
+/* `position: relative` põe o conteúdo acima do blob. */
+.heroInner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+@media (min-width: 1024px) {
+  .heroInner {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-10);
+  }
+
+  /* Impede que o texto empurre o filtro para fora da linha. */
+  .heroCopy {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+}
+
+.title {
+  margin-top: var(--space-4);
+  font-family: var(--font-display);
+  font-size: var(--text-display-xl);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--color-text);
+}
+
+.paragraph {
+  max-width: 54ch;
+  margin-top: var(--space-5);
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+/* --- lista de shows -------------------------------------------------------- */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Estado vazio: hoje inalcançável com os dados de `showsFull`, mas o filtro
+   nunca deve devolver uma seção em branco. */
+.empty {
+  padding: var(--space-10) var(--space-6);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-alt);
+  font-size: var(--text-lg);
+  line-height: 1.5;
+  text-align: center;
+  color: var(--color-text-secondary);
+}

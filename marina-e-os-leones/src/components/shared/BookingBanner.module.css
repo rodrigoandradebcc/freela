@@ -1,0 +1,45 @@
+/* BookingBanner.module.css — faixa verde "A gente vai até aí". */
+
+.panel {
+  padding: var(--space-8) var(--space-6);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+/* O eyebrow padrão é escuro (--color-text-tertiary) e sumiria no verde. */
+.eyebrow {
+  color: var(--color-green-light);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-display-md);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--color-green-lighter);
+}
+
+/* Sobrescreve a variante `dark` do Button só neste contexto: no painel verde o
+   botão do design é claro. A classe é duplicada (`.cta.cta`) para vencer
+   `.dark` por especificidade — assim o resultado não depende da ordem em que
+   os CSS Modules entram no bundle. */
+.cta.cta {
+  margin-top: var(--space-2);
+  background-color: var(--color-green-lighter);
+  color: var(--color-green-dark);
+}
+
+.cta.cta:hover {
+  background-color: var(--color-green-light);
+}
+
+@media (min-width: 768px) {
+  .panel {
+    padding: var(--space-10) var(--space-10);
+  }
+}

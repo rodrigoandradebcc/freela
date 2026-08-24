@@ -1,0 +1,28 @@
+/* Stat.module.css — número grande + rótulo ("120 SHOWS", "8 ANOS"...). */
+
+.stat {
+  display: block;
+}
+
+.value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--text-display-sm);
+  font-weight: 400;
+  line-height: 1;
+  /* Laranja escuro (não --color-accent puro): o número é texto e precisa
+     passar AA sobre os fundos claros do site. */
+  color: var(--color-accent-text);
+}
+
+.label {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+}

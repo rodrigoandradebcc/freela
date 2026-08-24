@@ -2,3 +2,5 @@
 node_modules/
 **/node_modules/
 
+# Local Git metadata preserved while nested repositories are tracked as folders
+.nested-git-backups/

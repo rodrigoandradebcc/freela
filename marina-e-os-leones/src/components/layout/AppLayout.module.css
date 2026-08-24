@@ -1,0 +1,49 @@
+/* AppLayout.module.css — moldura comum a todas as rotas. */
+
+.shell {
+  display: flex;
+  min-height: 100dvh;
+  flex-direction: column;
+}
+
+/* O conteúdo da rota cresce para empurrar o Footer para o fim mesmo em páginas
+   curtas (stubs, 404). A folga para a BottomTabBar fixa NÃO fica aqui: ela é o
+   `padding-bottom` do Footer, que é sempre o último elemento da página — pôr
+   nos dois criaria um vão morto entre o conteúdo e o rodapé. */
+.main {
+  flex: 1 0 auto;
+}
+
+/* --- skip link -------------------------------------------------------------
+   Fica escondido pela classe global `.visually-hidden` até receber foco. No
+   foco desfazemos o recorte e o trazemos para a tela.
+
+   Optamos por `position: fixed` (e não `static`) de propósito: em `static` o
+   link entraria no fluxo e empurraria o header inteiro para baixo no instante
+   do foco — um salto de layout logo no primeiro Tab da página. Fixo, ele
+   flutua sobre o header, acima de tudo (--z-overlay). O seletor `.skipLink:focus`
+   tem especificidade maior que `.visually-hidden`, então vence independente da
+   ordem em que os CSS forem injetados. */
+.skipLink:focus {
+  position: fixed;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: var(--z-overlay);
+  display: inline-flex;
+  align-items: center;
+  overflow: visible;
+  width: auto;
+  height: auto;
+  min-height: 44px; /* alvo de toque mínimo (WCAG 2.5.8) — o padding dava 43px */
+  margin: 0;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-pill);
+  background: var(--color-dark);
+  clip: auto;
+  clip-path: none;
+  color: var(--color-text-on-dark);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}

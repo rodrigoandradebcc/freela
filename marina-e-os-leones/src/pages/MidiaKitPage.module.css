@@ -1,0 +1,274 @@
+/* MidiaKitPage.module.css — tela 6 · Mídia kit.
+
+   MOBILE-FIRST (convenção do projeto): a base é sempre uma coluna só; as
+   grades entram por `min-width`, nunca por `max-width`.
+
+   CONTAINER: `.section` centra o conteúdo em 1200px (mesma medida do Header e
+   do Footer) e aplica o padding horizontal padrão — 20px na base, 44px a
+   partir de 1024px. O espaçamento vertical entre seções é o `margin-bottom`
+   dele, para não somar margens divergentes seção a seção.
+
+   Cores, raios, sombras e tempos vêm de tokens.css. Os px literais são medidas
+   de layout do design (gaps, alturas de foto) que não têm token. */
+
+.page {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-12);
+}
+
+.section {
+  max-width: 1200px;
+  margin: 0 auto 48px;
+  padding: 0 20px;
+}
+
+@media (min-width: 1024px) {
+  .page {
+    padding-top: var(--space-10);
+  }
+
+  .section {
+    margin-bottom: 62px;
+    padding: 0 var(--space-section-x);
+  }
+}
+
+/* Alvo de âncora sob um Header sticky: sem esta folga o topo do elemento
+   termina escondido atrás do header no fim da rolagem. Vale tanto para o
+   `#recursos` (link do hero) quanto para o `#contato` (scrollIntoView dos
+   ResourceCard). */
+.anchorTarget {
+  scroll-margin-top: 96px;
+}
+
+/* --- 1. Hero ---------------------------------------------------------------
+   Sem Blob decorativo: é a única tela do design que não usa a mancha. */
+
+.hero {
+  display: grid;
+  gap: var(--space-8);
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    /* minmax(0, …) e não `1.05fr` puro: sem o mínimo zero uma palavra longa do
+       título esticaria a coluna e criaria scroll horizontal. */
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 36px;
+    align-items: center;
+  }
+}
+
+.heroCopy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.heroTitle {
+  max-width: 14ch;
+  font-family: var(--font-display);
+  font-size: var(--text-display-xl);
+  font-weight: 400;
+  line-height: 1.03;
+  color: var(--color-text);
+}
+
+.heroParagraph {
+  max-width: 56ch;
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+/* Contexto de posicionamento do card flutuante. Nada de `overflow: hidden`
+   aqui: a partir de 1024px o card sangra de propósito para fora da foto. */
+.heroMedia {
+  position: relative;
+}
+
+/* `height` fixa + `object-fit: cover`: a foto é retrato (800×1200) e sem o
+   corte dominaria a dobra no desktop. O `.heroImage` (classe) vence o
+   `img { height: auto }` do reset global por especificidade. */
+.heroImage {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  object-position: center 30%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  background-color: var(--color-bg-alt);
+}
+
+@media (min-width: 768px) {
+  .heroImage {
+    height: 440px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroImage {
+    height: 520px;
+  }
+}
+
+/* No mobile o card fica DENTRO da foto (offsets positivos): com `left`/`bottom`
+   negativos ele encostaria na borda de 20px do container e, no iPhone SE
+   (375px), abriria barra de rolagem horizontal. O sangramento do design só
+   entra a partir de 1024px, onde há o gap de 36px da grade para absorvê-lo. */
+.heroFloatingCard {
+  position: absolute;
+  left: var(--space-4);
+  bottom: var(--space-4);
+  padding: 18px 24px;
+  border-radius: var(--radius-lg);
+  background: var(--color-cream-card);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 1024px) {
+  .heroFloatingCard {
+    left: -20px;
+    bottom: -20px;
+  }
+}
+
+/* --- 2. Grade de recursos -------------------------------------------------- */
+
+.resourcesGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .resourcesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
+  }
+}
+
+@media (min-width: 1024px) {
+  .resourcesGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* --- 3. Painel escuro: números + proposta ---------------------------------- */
+
+.pressPanel {
+  display: grid;
+  gap: var(--space-8);
+  padding: 28px 22px;
+  border-radius: var(--radius-lg);
+  background: var(--color-dark);
+  color: var(--color-text-on-dark);
+}
+
+@media (min-width: 768px) {
+  .pressPanel {
+    padding: 38px 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .pressPanel {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: start;
+  }
+
+  /* A coluna dos números é bem mais curta que a do formulário; centrar evita
+     o vão morto embaixo dela. */
+  .numbersColumn {
+    align-self: center;
+  }
+}
+
+/* --color-text-tertiary (padrão do SectionEyebrow) sobre --color-dark dá
+   2,68:1 — ilegível. --color-dark-muted sobe para 5,76:1 e passa AA. */
+.eyebrowOnDark {
+  color: var(--color-dark-muted);
+}
+
+/* CONTRASTE DOS <Stat> SOBRE O PAINEL ESCURO
+   ------------------------------------------
+   O Stat é compartilhado e pinta o número com var(--color-accent-text)
+   (#8c491a) e o rótulo com var(--color-text-tertiary) (#686052) — as duas
+   cores são calibradas para os fundos CLAROS do site e falham sobre
+   --color-dark (#201e1d): 2,44:1 e 2,68:1.
+
+   Solução: redefinir os DOIS tokens aqui, no escopo deste wrapper. Custom
+   properties são herdadas, então os filhos do Stat resolvem os novos valores
+   sem que a página conheça os nomes de classe (hasheados) do módulo do Stat,
+   sem `:global`, sem seletor descendente amarrado à estrutura interna dele e
+   sem editar o componente compartilhado — se um dia o Stat mudar de markup,
+   isto continua funcionando.
+
+   Novos valores: número em --color-accent-light (#f6a06b, 8,03:1) e rótulo em
+   --color-dark-muted (#a19786, 5,76:1). Ambos passam AA.
+
+   O escopo é só a grade de números: o card claro ao lado continua com os
+   tokens originais. */
+.pressStats {
+  --color-accent-text: var(--color-accent-light);
+  --color-text-tertiary: var(--color-dark-muted);
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+}
+
+/* Três em linha assim que couberem — abaixo disso o terceiro cai sozinho na
+   segunda linha, que é o comportamento natural da grade de 2 colunas. */
+@media (min-width: 560px) {
+  .pressStats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Card claro dentro do painel escuro: precisa restaurar a cor de texto, senão
+   herda --color-text-on-dark do painel. */
+.contactCard {
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  background: var(--color-cream-card);
+  color: var(--color-text);
+}
+
+@media (min-width: 768px) {
+  .contactCard {
+    padding: 28px;
+  }
+}
+
+.contactTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-display-sm);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--color-text);
+}
+
+.formAnchor {
+  margin-top: var(--space-5);
+}
+
+.contactNote {
+  margin-top: var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: var(--color-text-secondary);
+}

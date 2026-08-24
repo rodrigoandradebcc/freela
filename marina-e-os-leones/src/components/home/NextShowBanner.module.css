@@ -1,0 +1,54 @@
+/* NextShowBanner.module.css — painel verde "PRÓXIMO SHOW" da Home.
+   Mobile-first: base = coluna; a partir de 768px, informação e relógio ficam
+   nas pontas da mesma linha. */
+
+.panel {
+  padding: var(--space-8) var(--space-6);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* O eyebrow padrão é escuro (--color-text-tertiary) e sumiria no verde. */
+.eyebrow {
+  color: var(--color-green-light);
+}
+
+.venue {
+  font-family: var(--font-display);
+  font-size: var(--text-display-md);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--color-green-lighter);
+}
+
+.date {
+  max-width: 32ch;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--color-green-light);
+}
+
+@media (min-width: 768px) {
+  .panel {
+    padding: var(--space-10);
+  }
+
+  .inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-8);
+  }
+}

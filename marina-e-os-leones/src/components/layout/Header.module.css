@@ -1,0 +1,132 @@
+/* Header.module.css — barra fixa no topo.
+
+   Mobile-first: a base é o header mobile (logo + CTA curto). A navegação por
+   texto só existe a partir de 1024px; abaixo disso quem navega é a
+   BottomTabBar. */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background: var(--color-bg);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-3) var(--space-5);
+}
+
+/* --- logo ----------------------------------------------------------------- */
+
+.logo {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--space-3);
+  /* Alvo de toque mínimo (WCAG 2.5.8). As imagens somam 35px de altura no
+     mobile e 42px no desktop; sem isto o link ficava abaixo do piso. Não muda
+     o layout: o CTA ao lado já tem 44px, então a linha do header já tinha essa
+     altura — só a ÁREA CLICÁVEL do logo cresce. */
+  min-height: 44px;
+  text-decoration: none;
+}
+
+.logoMark {
+  width: 36px;
+  height: auto;
+}
+
+.logoWordmark {
+  width: 116px;
+  height: auto;
+}
+
+/* --- lados direitos: um para mobile, outro para desktop --------------------
+   Os wrappers (e não os próprios botões) controlam o `display`, para não
+   depender da ordem de injeção entre este módulo e Button.module.css. */
+
+.mobileActions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+}
+
+.desktopActions {
+  display: none;
+}
+
+/* --- navegação (só desktop) ----------------------------------------------- */
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.navLink {
+  position: relative;
+  padding-bottom: 4px;
+  /* A borda transparente no estado inativo reserva a mesma altura do estado
+     ativo — assim marcar o item não empurra a linha de baixo. */
+  border-bottom: 2.5px solid transparent;
+  color: var(--color-text-tertiary);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+/* Alvo de toque mínimo (WCAG 2.5.8): o item de nav tem 25px de altura e o
+   sublinhado do estado ativo precisa ficar COLADO no texto — crescer a caixa
+   para 44px afastaria a linha. Esta camada invisível estende só a área
+   clicável (25 + 2×10 = 45px), sem mexer em um pixel do layout. O `gap` de
+   24px entre os itens garante que as camadas não se sobreponham. */
+.navLink::after {
+  content: '';
+  position: absolute;
+  inset: -10px 0;
+}
+
+.navLink:hover {
+  color: var(--color-text);
+}
+
+.navLinkActive {
+  border-bottom-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+/* --- desktop -------------------------------------------------------------- */
+
+@media (min-width: 1024px) {
+  .inner {
+    padding: var(--space-4) var(--space-section-x);
+  }
+
+  .logoMark {
+    width: 44px;
+  }
+
+  .logoWordmark {
+    width: 140px;
+  }
+
+  .mobileActions {
+    display: none;
+  }
+
+  .desktopActions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+  }
+}

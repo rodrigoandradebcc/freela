@@ -1,0 +1,17 @@
+/* Blob.module.css — círculo decorativo de fundo.
+   Tamanho e posição NÃO são definidos aqui: quem usa passa `className` com
+   `top/left/right/bottom/width/height` no seu próprio *.module.css. */
+
+.blob {
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.green {
+  background-color: var(--color-green-light);
+}
+
+.orange {
+  background-color: var(--color-peach);
+}

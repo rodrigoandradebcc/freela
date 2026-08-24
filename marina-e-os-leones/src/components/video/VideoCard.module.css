@@ -1,0 +1,189 @@
+/* VideoCard.module.css — cartão de vídeo (large: título sobreposto /
+   small: texto abaixo da thumb).
+
+   Mobile-first: alturas menores na base, crescendo a partir de 768px. */
+
+.card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* --- thumb ---------------------------------------------------------------- */
+
+.media {
+  position: relative;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.card:hover .image {
+  transform: scale(1.04);
+}
+
+.playBadge {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-accent);
+  color: var(--color-text-on-dark);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Compensa o vazio à esquerda do triângulo: centra opticamente. */
+.playIcon {
+  width: 16px;
+  height: 16px;
+  margin-left: 2px;
+}
+
+/* --- variante large ------------------------------------------------------- */
+
+.large .media {
+  height: 220px;
+  border-radius: var(--radius-lg);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to top, rgba(32, 30, 29, 0.78), transparent 62%);
+}
+
+.largeFooter {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4);
+}
+
+.largeTitle {
+  min-width: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-display-sm);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--color-text-on-dark);
+  overflow-wrap: anywhere;
+}
+
+.largeDuration {
+  flex: none;
+  padding-bottom: 4px;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  color: var(--color-text-on-dark);
+}
+
+/* --- variante small ------------------------------------------------------- */
+
+.small {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-alt);
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.small:hover {
+  background-color: var(--color-bg-alt-hover);
+}
+
+.small .media {
+  height: 180px;
+}
+
+.durationBadge {
+  position: absolute;
+  right: var(--space-3);
+  bottom: var(--space-3);
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  background-color: rgba(32, 30, 29, 0.78);
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  color: var(--color-text-on-dark);
+}
+
+.body {
+  padding: var(--space-5);
+}
+
+.title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--color-text);
+  overflow-wrap: anywhere;
+}
+
+.description {
+  display: block;
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+}
+
+/* --- tablet / desktop ----------------------------------------------------- */
+
+@media (min-width: 768px) {
+  .playBadge {
+    top: var(--space-4);
+    right: var(--space-4);
+    width: 44px;
+    height: 44px;
+  }
+
+  .playIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .large .media {
+    height: 300px;
+  }
+
+  .largeFooter {
+    padding: var(--space-5);
+  }
+
+  .small .media {
+    height: 200px;
+  }
+
+  .durationBadge {
+    right: var(--space-4);
+    bottom: var(--space-4);
+  }
+
+  .body {
+    padding: 22px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+}

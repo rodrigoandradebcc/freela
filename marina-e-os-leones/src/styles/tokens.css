@@ -1,0 +1,152 @@
+/* =============================================================================
+   tokens.css — design tokens de "Marina & Os Leones"
+   -----------------------------------------------------------------------------
+   Fonte única de verdade para cor, tipografia, raio, sombra, espaçamento,
+   motion e z-index. Componentes devem consumir SEMPRE via var(--token) e nunca
+   escrever valores literais (hex, px de espaçamento, etc.) nos *.module.css.
+   ========================================================================== */
+
+:root {
+  /* --- cores base ---------------------------------------------------------- */
+  --color-bg: #f5ead8;
+  --color-bg-alt: #ebddc5;
+  --color-bg-alt-hover: #eee7db;
+  --color-cream-card: #f9f4ed;
+  --color-dark: #201e1d;
+  --color-dark-muted: #a19786;
+
+  /* --- texto --------------------------------------------------------------- */
+  --color-text: #201e1d;
+  --color-text-secondary: #645c50;
+  /* E14 (a11y): era #82796a. Medido, aquele valor reprovava AA para texto
+     pequeno em TODOS os fundos claros onde este token é usado —
+     3,61:1 sobre --color-bg, 3,21:1 sobre --color-bg-alt (aba inativa da
+     BottomTabBar e placeholder do ContactForm) e 3,92:1 sobre
+     --color-cream-card. Como cada uso é texto de 10–12,5px (eyebrow, rótulo
+     de Stat, nav do Header, aba, label de formulário), nenhum se qualifica
+     como "texto grande": o limite é 4,5:1.
+     #686052 mantém o mesmo cinza quente e sobe para 5,21 / 4,63 / 5,67:1.
+     Consequência aceita: fica perto de --color-text-secondary — é o preço de
+     passar AA sobre --color-bg-alt, o mais escuro dos fundos claros. */
+  --color-text-tertiary: #686052;
+  --color-text-on-dark: #f9f4ed;
+
+  /* --- marca / laranja ------------------------------------------------------
+     ATENÇÃO DE CONTRASTE:
+     --color-accent falha AA para texto pequeno sobre --color-bg. Use-o apenas
+     em superfícies decorativas, preenchimentos, bordas e texto display grande
+     (>= 24px / >= 19px bold). Para links e texto pequeno sobre fundo claro use
+     --color-accent-text, que passa AA.                                       */
+  --color-accent: #c67139;
+  --color-accent-hover: #b2622d;
+  --color-accent-light: #f6a06b;
+  --color-accent-text: #8c491a;
+  --color-brown-panel: #8c491a;
+
+  /* Laranja de BOTÃO PREENCHIDO (Button variant="orange").
+     Medido em E14: branco sobre --color-accent dá 3,61:1 e sobre
+     --color-accent-hover 4,49:1 — os dois reprovam AA para o texto do Button
+     (12,5px bold, que não conta como "texto grande": o limite são 18,66px em
+     bold). As duas saídas eram escurecer o fundo mantendo o texto branco, ou
+     manter o fundo e escrever em --color-text escuro (4,60:1).
+     Escolhida a primeira: a pill laranja com letra branca é a assinatura do
+     CTA no design original, e escurecer o laranja preserva essa leitura,
+     enquanto inverter para texto escuro mudaria o caráter do botão.
+     #a85a28 → 5,05:1 com branco; hover #94501e → 6,13:1.
+     Use SÓ no botão preenchido: --color-accent segue sendo o laranja de
+     superfícies e elementos não textuais (barra de progresso, selos, bordas),
+     onde o limite é 3:1 e ele passa. */
+  --color-accent-strong: #a85a28;
+  --color-accent-strong-hover: #94501e;
+
+  /* --- anel de foco ---------------------------------------------------------
+     Cor do `:focus-visible` global (ver global.css). Existe como TOKEN, e não
+     como literal na regra, porque precisa trocar conforme a superfície: WCAG
+     1.4.11 pede 3:1 entre o indicador de foco e o que está atrás dele, e o
+     anel é desenhado 2px FORA do elemento — ou seja, sobre o fundo do PAI.
+
+     Medido em E14: este marrom passa nos fundos claros (5,72:1 sobre
+     --color-bg, 5,09:1 sobre --color-bg-alt, 6,22:1 sobre --color-cream-card)
+     e reprova em todos os escuros — 2,44:1 sobre --color-dark, 1,05:1 sobre
+     --color-green e 1,00:1 sobre --color-brown-panel, onde o anel é o MESMO
+     hex do painel e simplesmente desaparecia.
+
+     Por isso as superfícies escuras redefinem o token no próprio bloco
+     (Footer, NowPlayingCard, TexturedPanel), e como custom properties são
+     herdadas, todo focável dentro delas passa a receber o anel claro sem que
+     nenhum componente precise conhecer o contexto em que foi montado. */
+  --color-focus-ring: #8c491a;
+  --color-focus-ring-on-dark: #f9f4ed;
+
+  /* --- verde --------------------------------------------------------------- */
+  --color-green: #56633f;
+  --color-green-light: #e1eecc;
+  --color-green-lighter: #f0fae1;
+  --color-green-dark: #3d472b;
+
+  /* --- pêssego ------------------------------------------------------------- */
+  --color-peach: #ffe1d0;
+  --color-peach-light: #ffc6a5;
+  --color-peach-pale: #fff2eb;
+
+  /* --- tipografia ---------------------------------------------------------- */
+  --font-display: 'Caprasimo', Georgia, serif;
+  --font-body: 'Figtree', system-ui, -apple-system, sans-serif;
+
+  /* --- escala de texto -----------------------------------------------------
+     Tamanhos fixos para UI/corpo; escala fluida para display.
+
+     As curvas de display foram calibradas para interpolar linearmente entre
+     360px (menor viewport-alvo) e 1280px (onde o layout já está no máximo):
+     nesse intervalo o texto cresce continuamente, sem saltos de breakpoint.
+     A parte em `rem` de cada preferred value garante que o zoom do navegador
+     continue afetando o tamanho (clamp só com `vw` quebraria WCAG 1.4.4).   */
+  --text-xs: 0.6875rem;   /* 11px */
+  --text-sm: 0.78125rem;  /* 12.5px */
+  --text-base: 1rem;      /* 16px — nunca menor no mobile, evita zoom automático do iOS em inputs */
+  --text-lg: 1.0625rem;   /* 17px */
+
+  --text-display-sm: clamp(1.5rem, 0.65vw + 1.36rem, 1.875rem);   /* 24px @360 → 30px @1280 */
+  --text-display-md: clamp(1.875rem, 1.52vw + 1.53rem, 2.75rem);  /* 30px @360 → 44px @1280 */
+  --text-display-lg: clamp(2.125rem, 2.17vw + 1.64rem, 3.375rem); /* 34px @360 → 54px @1280 */
+  --text-display-xl: clamp(2.375rem, 3.91vw + 1.49rem, 4.625rem); /* 38px @360 → 74px @1280 — hero H1 */
+
+  /* --- raios --------------------------------------------------------------- */
+  --radius-lg: 28px;
+  --radius-md: 20px;
+  --radius-sm: 16px;
+  --radius-pill: 999px;
+
+  /* --- sombras ------------------------------------------------------------- */
+  --shadow-lg: 0 12px 32px rgba(46, 43, 37, 0.22);
+  --shadow-sm: 0 3px 10px rgba(46, 43, 37, 0.16);
+
+  /* --- espaçamento (escala 4/8pt) ------------------------------------------ */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* Recuo horizontal de seção (fora da escala 4/8pt de propósito: é o padding
+     lateral fixo do design original, usado por Header, Footer, BottomTabBar e
+     todas as páginas para manter o mesmo container/alinhamento em toda a
+     aplicação — nunca redeclare 44px literal, sempre referencie este token). */
+  --space-section-x: 44px;
+
+  /* --- motion -------------------------------------------------------------- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+
+  /* --- z-index scale --------------------------------------------------------
+     Nada fora desta escala. Header e tab bar coexistem no mesmo nível (nunca
+     aparecem sobrepostos); overlays (modal, drawer, lightbox) ficam acima.   */
+  --z-header: 40;
+  --z-tabbar: 40;
+  --z-overlay: 100;
+}

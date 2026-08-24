@@ -1,0 +1,40 @@
+/* TexturedPanel.module.css — painel colorido com textura diagonal.
+   A textura em si (`background-image`) vem das utilitárias globais
+   `.texture-diagonal--green` / `.texture-diagonal--orange` de global.css;
+   aqui ficam só a cor sólida, o raio e o empilhamento. */
+
+.panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+/* ANEL DE FOCO NOS DOIS TONS
+   --------------------------
+   Botões e links montados DENTRO destes painéis (CTA do BookingBanner, as três
+   pills do painel de mídia kit da Home) recebem o anel do :focus-visible
+   global. O anel padrão é --color-accent-text (#8c491a), que sobre estes
+   fundos dá 1,05:1 no verde e 1,00:1 no marrom — ali ele é literalmente o
+   mesmo hex do painel e some. Redefinir o token no painel resolve para
+   qualquer focável que venha por `children`, sem que o componente filho
+   precise saber sobre que fundo foi montado: 5,90:1 no verde, 6,22:1 no
+   marrom. */
+.green {
+  background-color: var(--color-green);
+  color: var(--color-text-on-dark);
+  --color-focus-ring: var(--color-focus-ring-on-dark);
+}
+
+/* O painel "laranja" do design usa o marrom sólido como fundo — o laranja
+   aparece só na textura e nos elementos por cima. */
+.orange {
+  background-color: var(--color-brown-panel);
+  color: var(--color-text-on-dark);
+  --color-focus-ring: var(--color-focus-ring-on-dark);
+}
+
+/* Sobe o conteúdo acima do background-image da textura e cria contexto para
+   filhos absolutos (selos, blobs). */
+.content {
+  position: relative;
+}

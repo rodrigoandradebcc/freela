@@ -1,0 +1,131 @@
+/* TrackList.module.css — linhas clicáveis do repertório.
+
+   O padding vem de duas custom properties (`--row-pad-*`) em vez de ser
+   reescrito em cada variante: assim `.dense` e os breakpoints só trocam os
+   valores, e a regra de `padding` continua existindo num lugar só. */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  --row-pad-y: var(--space-3);
+  --row-pad-x: var(--space-4);
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: 56px;
+  padding: var(--row-pad-y) var(--row-pad-x);
+  border: 0;
+  border-radius: var(--radius-md);
+  background-color: var(--color-bg-alt);
+  color: var(--color-text);
+  text-align: left;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.row:hover {
+  background-color: var(--color-bg-alt-hover);
+}
+
+/* Home: linhas mais compactas (a seção ali é um preview, não a página toda). */
+.dense {
+  --row-pad-y: var(--space-2);
+  --row-pad-x: var(--space-3);
+
+  min-height: 48px;
+}
+
+@media (min-width: 768px) {
+  .row {
+    --row-pad-y: var(--space-4);
+    --row-pad-x: var(--space-5);
+
+    gap: var(--space-4);
+  }
+
+  .dense {
+    --row-pad-y: var(--space-3);
+    --row-pad-x: var(--space-4);
+  }
+}
+
+/* --- conteúdo da linha ---------------------------------------------------- */
+
+.number {
+  flex: 0 0 auto;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+  /* --color-text-secondary (4,92:1 sobre --color-bg-alt) em vez do terciário:
+     este número é informação, e o secundário dá a folga que o tamanho pede. */
+  color: var(--color-text-secondary);
+}
+
+.title {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-text);
+}
+
+.style {
+  flex: 0 0 auto;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-green);
+}
+
+.duration {
+  flex: 0 0 auto;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-secondary);
+}
+
+/* --- faixa tocando -------------------------------------------------------- */
+
+/* Três sinais somados (fundo, barra lateral e peso do título) para o estado
+   não depender só de cor — WCAG 1.4.1. */
+.active {
+  background-color: var(--color-bg-alt-hover);
+}
+
+.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 4px;
+  height: 56%;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-accent);
+  transform: translateY(-50%);
+}
+
+.active .title {
+  font-weight: 800;
+}
+
+.active .number {
+  color: var(--color-accent-text);
+}

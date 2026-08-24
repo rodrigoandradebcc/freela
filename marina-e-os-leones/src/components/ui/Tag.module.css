@@ -1,0 +1,42 @@
+/* Tag.module.css — pill pequena de rótulo (FESTIVAL, ESGOTADO, REGGAE...). */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.orange {
+  background-color: var(--color-peach);
+  color: var(--color-accent-text);
+}
+
+.peach {
+  background-color: var(--color-peach);
+  color: var(--color-accent-text);
+}
+
+.green {
+  background-color: var(--color-green-light);
+  color: var(--color-green);
+}
+
+/* Estado ESGOTADO — cinza quente derivado do creme de fundo.
+   E14 (a11y): o texto era var(--color-text-secondary) (#645c50), que sobre
+   este cinza dá 4,44:1 — reprova AA nos 10,5px da pill. O literal abaixo é o
+   mesmo cinza quente meio tom mais escuro e sobe para 5,02:1, preservando o ar
+   "apagado" que o estado esgotado pede (var(--color-text) daria 11,2:1, mas
+   deixaria justo o rótulo desativado como o mais forte de todas as tags).
+   Literal e não token porque a cor existe só aqui, como o fundo logo acima. */
+.gray {
+  background-color: #dcd3c4;
+  color: #5c5449;
+}

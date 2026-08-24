@@ -1,0 +1,155 @@
+/* HeroHome.module.css — abertura da Home.
+
+   Mobile-first: base é uma coluna só (texto, depois imagem). A partir de
+   1024px vira grid de duas colunas, com a coluna da imagem esticando na
+   altura da coluna de texto (`align-items` default = stretch). */
+
+.hero {
+  display: grid;
+  gap: var(--space-8);
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--space-12);
+  }
+
+  .copy {
+    align-self: center;
+  }
+}
+
+/* --- texto ---------------------------------------------------------------- */
+
+.title {
+  margin-top: var(--space-5);
+  font-family: var(--font-display);
+  font-size: var(--text-display-xl);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--color-text);
+}
+
+/* Cada pedaço de `HERO.titleParts` que abre linha vira um bloco; a terceira
+   linha guarda "a pista rugir." inteira, com o destaque inline no meio. */
+.titleLine {
+  display: block;
+}
+
+/* --color-accent puro é permitido aqui: display grande, longe do limite de
+   contraste que vale para texto pequeno (ver tokens.css). */
+.titleAccent {
+  color: var(--color-accent);
+}
+
+.paragraph {
+  max-width: 62ch;
+  margin-top: var(--space-5);
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid rgba(32, 30, 29, 0.1);
+}
+
+@media (min-width: 768px) {
+  .stats {
+    gap: var(--space-8);
+  }
+}
+
+/* --- imagem --------------------------------------------------------------- */
+
+/* Contexto de posicionamento do card flutuante. Sem `overflow: hidden` aqui —
+   quem corta a foto nos cantos é `.media`. */
+.mediaColumn {
+  position: relative;
+}
+
+.media {
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-alt);
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* No desktop a coluna da direita é feita para sangrar até a borda do viewport:
+   só os cantos internos (esquerda) ficam arredondados. */
+@media (min-width: 1024px) {
+  .media {
+    height: 100%;
+    min-height: 480px;
+    aspect-ratio: auto;
+    border-radius: 0;
+    border-top-left-radius: var(--radius-lg);
+    border-bottom-left-radius: var(--radius-lg);
+  }
+}
+
+/* --- card flutuante "AO VIVO" --------------------------------------------- */
+
+.showCard {
+  position: absolute;
+  left: var(--space-4);
+  bottom: var(--space-4);
+  width: 120px;
+  margin: 0;
+  padding: var(--space-2);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (min-width: 768px) {
+  .showCard {
+    left: var(--space-6);
+    bottom: var(--space-6);
+    width: 152px;
+  }
+}
+
+.showCardImage {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  /* Raio interno = raio externo menos o padding do card. */
+  border-radius: var(--radius-md);
+}
+
+.showCardCaption {
+  padding: var(--space-2) var(--space-1) var(--space-1);
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  /* O design pede `9px/1`; com o texto quebrando em duas linhas nesta largura,
+     1 encavalaria as linhas — 1.4 mantém a legibilidade. */
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  /* Secundário, não terciário: 9px é o menor texto do site e merece a folga
+     maior (5,53:1 sobre --color-bg, contra 5,21:1 do terciário). */
+  color: var(--color-text-secondary);
+}

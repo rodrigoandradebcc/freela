@@ -1,0 +1,237 @@
+/* SobrePage.module.css — tela 5 · Sobre.
+
+   Mobile-first, seguindo a convenção do projeto: base = mobile, breakpoints só
+   em `min-width`. Padding horizontal de seção: 20px na base, 44px a partir de
+   1024px; o conteúdo é centralizado por um `.sectionInner` de 1200px, mesma
+   medida do Header e do Footer. */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-12);
+}
+
+/* O padding horizontal mora AQUI (mesmo elemento que centraliza), nunca nos
+   wrappers `.members`/`.trajectory` por fora — colocá-lo no wrapper externo
+   recentraliza a caixa de 1200px numa área já estreitada por ele, e o
+   conteúdo fica 44px mais à esquerda do que o Header/Footer e o hero. */
+.sectionInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media (min-width: 1024px) {
+  .sectionInner {
+    padding: 0 var(--space-section-x);
+  }
+}
+
+/* --- 1. Hero ---------------------------------------------------------------
+   `overflow: hidden` é obrigatório: o Blob sangra para fora à direita e sem o
+   recorte criaria barra de rolagem horizontal no mobile. */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.heroBlob {
+  top: -120px;
+  right: -140px;
+  width: 260px;
+  height: 260px;
+  opacity: 0.55;
+}
+
+/* O padding horizontal mora AQUI (mesmo elemento que centraliza), não em
+   `.hero` — mesma correção aplicada a `.sectionInner` acima. */
+.heroInner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media (min-width: 1024px) {
+  .heroInner {
+    padding: 0 var(--space-section-x);
+  }
+}
+
+.heroCopy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.heroTitle {
+  max-width: 16ch;
+  font-family: var(--font-display);
+  font-size: var(--text-display-xl);
+  font-weight: 400;
+  line-height: 1.02;
+  color: var(--color-text);
+  text-wrap: balance;
+}
+
+.heroParagraph {
+  max-width: 58ch;
+  font-size: var(--text-lg);
+  line-height: 1.62;
+  color: var(--color-text-secondary);
+}
+
+.heroFigure {
+  /* Isola o raio da foto do resto do layout e evita que a sombra vaze na
+     borda da viewport. */
+  border-radius: var(--radius-lg);
+}
+
+/* Vence o `img { height: auto }` do reset global: a foto é um corte de altura
+   fixa, não um retrato inteiro. */
+.heroImage {
+  width: 100%;
+  height: 380px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  object-fit: cover;
+  object-position: center 28%;
+}
+
+@media (min-width: 640px) {
+  .heroImage {
+    height: 460px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroBlob {
+    top: -100px;
+    right: -120px;
+    width: 440px;
+    height: 440px;
+  }
+
+  .heroInner {
+    display: grid;
+    grid-template-columns: 1.06fr 0.94fr;
+    gap: var(--space-10);
+    align-items: center;
+  }
+
+  .heroImage {
+    height: 560px;
+  }
+}
+
+/* --- 2. Quem sobe no palco -------------------------------------------------- */
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-display-lg);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--color-text);
+}
+
+.memberGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  margin: var(--space-8) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.membersNote {
+  max-width: 68ch;
+  margin-top: var(--space-5);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+@media (min-width: 640px) {
+  .memberGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .memberGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+/* --- 3. Trajetória ---------------------------------------------------------- */
+
+.trajectoryPanel {
+  padding: var(--space-8) var(--space-6);
+}
+
+/* O eyebrow padrão é escuro (--color-text-tertiary) e sumiria no verde. */
+.trajectoryEyebrow {
+  color: var(--color-green-light);
+}
+
+.trajectoryTitle {
+  max-width: 24ch;
+  margin-top: var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--text-display-md);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--color-green-lighter);
+  text-wrap: balance;
+}
+
+.trajectoryGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  margin-top: var(--space-8);
+}
+
+/* E14 (a11y): o véu era CLARO, rgba(240, 250, 225, 0.12), e clareava o verde
+   do painel bem onde o texto do cartão se apoia — o fundo efetivo ficava
+   #73805e e `.trajectoryCardText` (12,5px) caía para 3,48:1. Mesmo problema, e
+   mesma solução, do `.block` do CountdownTimer: véu escuro de translucidez
+   equivalente. Fundo efetivo #545e41 → texto 5,67:1 e título 6,37:1. */
+.trajectoryCard {
+  padding: 26px;
+  border-radius: var(--radius-lg);
+  background: rgba(32, 30, 29, 0.18);
+}
+
+.trajectoryCardTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-display-sm);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--color-green-lighter);
+}
+
+.trajectoryCardText {
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-green-light);
+}
+
+@media (min-width: 768px) {
+  .trajectoryPanel {
+    padding: var(--space-10);
+  }
+
+  .trajectoryGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+}

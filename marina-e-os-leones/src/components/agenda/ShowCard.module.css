@@ -1,0 +1,150 @@
+/* ShowCard.module.css — linha da agenda.
+
+   Mobile-first: na base o card quebra em duas linhas (data + local na primeira,
+   tag/preço/CTA na segunda) para caber em 360px sem scroll horizontal. A partir
+   de 768px vira a linha única do design, sem quebra. */
+
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg-alt);
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.card:hover {
+  background-color: var(--color-bg-alt-hover);
+}
+
+/* --- círculo de data ------------------------------------------------------ */
+
+.date {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 66px;
+  height: 66px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-bg);
+}
+
+.day {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--color-accent-text);
+}
+
+.month {
+  margin-top: var(--space-1);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+/* --- local ---------------------------------------------------------------- */
+
+/* `min-width: 0` deixa o texto encolher dentro do flex em vez de empurrar o
+   card e criar scroll horizontal. */
+.info {
+  flex: 1 1 150px;
+  min-width: 0;
+}
+
+.venue {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--color-text);
+  overflow-wrap: anywhere;
+}
+
+.place {
+  margin-top: 6px;
+  font-size: var(--text-sm);
+  line-height: 1.4;
+  color: var(--color-text-secondary);
+}
+
+/* --- tag + preço + CTA ---------------------------------------------------- */
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+/* Empurra preço e CTA para a direita, com ou sem quebra de linha. */
+.tag {
+  margin-right: auto;
+}
+
+.price {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-text);
+}
+
+.soldOut {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.soldOutNote {
+  font-size: var(--text-xs);
+  line-height: 1.3;
+  color: var(--color-text-tertiary);
+}
+
+/* --- tablet / desktop ----------------------------------------------------- */
+
+@media (min-width: 768px) {
+  .card {
+    flex-wrap: nowrap;
+    gap: 26px;
+    padding: 20px 26px;
+  }
+
+  .date {
+    width: 82px;
+    height: 82px;
+  }
+
+  .day {
+    font-size: 28px;
+  }
+
+  .venue {
+    font-size: var(--text-display-sm);
+  }
+
+  .meta {
+    flex: none;
+    flex-wrap: nowrap;
+    gap: var(--space-4);
+    width: auto;
+  }
+
+  .tag {
+    margin-right: 0;
+  }
+
+  .soldOut {
+    align-items: center;
+  }
+}

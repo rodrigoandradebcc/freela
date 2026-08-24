@@ -1,0 +1,177 @@
+/* MusicaPage.module.css — página 3 · Música.
+
+   Mobile-first: a base é uma coluna só (player, depois repertório). A partir de
+   1024px vira o grid de duas colunas do design, com as duas esticando na mesma
+   altura (`align-items: stretch`).
+
+   Convenção de seção do projeto: o padding horizontal fica na SEÇÃO (largura
+   cheia) e o `max-width` no filho interno. É isso que permite ao blob do hero
+   vazar e ser cortado pela viewport, e não por uma coluna centralizada. */
+
+.page {
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-12);
+}
+
+@media (min-width: 1024px) {
+  .page {
+    padding-top: var(--space-10);
+  }
+}
+
+/* --- hero ------------------------------------------------------------------ */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.section {
+  margin-top: var(--space-8);
+}
+
+@media (min-width: 1024px) {
+  .section {
+    margin-top: var(--space-10);
+  }
+}
+
+/* `position: relative` (sem z-index) basta para o conteúdo ficar acima do
+   blob, já que ele vem antes no DOM. */
+/* O padding horizontal mora AQUI (no mesmo elemento que centraliza), não em
+   `.hero` — colocá-lo no wrapper externo recentraliza a caixa de 1200px numa
+   área já estreitada por ele, e o conteúdo fica desalinhado do Header/Footer
+   mesmo com o `.heroInner` batendo na borda certa (mesma classe de bug já
+   corrigida no Footer). */
+.heroInner {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-6) 20px var(--space-8);
+}
+
+@media (min-width: 1024px) {
+  .heroInner {
+    padding-right: var(--space-section-x);
+    padding-left: var(--space-section-x);
+  }
+}
+
+/* Decorativo. No mobile é menor e desce mais para não virar um bloco de cor
+   atrás do H1 numa tela estreita. */
+.heroBlob {
+  bottom: -170px;
+  left: -110px;
+  width: 260px;
+  height: 260px;
+}
+
+@media (min-width: 1024px) {
+  .heroBlob {
+    bottom: -120px;
+    left: -120px;
+    width: 420px;
+    height: 420px;
+  }
+}
+
+.title {
+  margin-top: var(--space-4);
+  font-family: var(--font-display);
+  font-size: var(--text-display-xl);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--color-text);
+}
+
+/* --- grid player + repertório ---------------------------------------------- */
+
+.grid {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    /* `minmax(0, …)` em vez de `1.02fr .98fr` puro: sem o mínimo zero, um
+       título de faixa longo esticaria a coluna e vazaria o grid. */
+    display: grid;
+    grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+    gap: 30px;
+    padding: 0 var(--space-section-x);
+    align-items: stretch;
+  }
+}
+
+/* --- coluna do repertório --------------------------------------------------- */
+
+.repertoire {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.repertoireHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.repertoireTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-display-md);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--color-text);
+}
+
+/* O texto de `REPERTOIRE_NOTE` já vem em caixa alta do dado; aqui só o
+   tratamento tipográfico. `--color-text-secondary` (e não o tertiary do
+   eyebrow) porque neste tamanho o tertiary não passa AA sobre o creme. */
+.repertoireNote {
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  color: var(--color-text-secondary);
+}
+
+/* --- bloco "ouça na sua plataforma" ---------------------------------------- */
+
+/* Card verde-claro LISO: no design original este bloco não recebe a textura
+   diagonal, então nada de `texture-diagonal--green` nem de TexturedPanel aqui.
+
+   `margin-top: auto` só no desktop: com as colunas esticadas, ele encosta na
+   base da coluna e alinha com o pé do card do player. */
+.platforms {
+  padding: 26px;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-green-light);
+}
+
+@media (min-width: 1024px) {
+  .platforms {
+    margin-top: auto;
+  }
+}
+
+.platformsTitle {
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-green);
+}
+
+.platformsLinks {
+  margin-top: var(--space-4);
+}
