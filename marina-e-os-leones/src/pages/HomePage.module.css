@@ -286,6 +286,15 @@
   margin-top: var(--space-8);
 }
 
+.panelPrimaryButton.panelPrimaryButton {
+  background-color: var(--color-bg);
+  color: var(--color-accent-text);
+}
+
+.panelPrimaryButton.panelPrimaryButton:hover {
+  background-color: var(--color-peach-pale);
+}
+
 /* A variante `outline` do Button é feita para fundo claro (borda escura +
    texto --color-text): sobre o marrom do painel ela ficaria ilegível. Aqui a
    pill vira clara. O seletor descendente é proposital — dois níveis garantem

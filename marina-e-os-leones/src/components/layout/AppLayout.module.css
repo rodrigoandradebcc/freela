@@ -12,6 +12,16 @@
    nos dois criaria um vão morto entre o conteúdo e o rodapé. */
 .main {
   flex: 1 0 auto;
+  animation: pageEnter 180ms var(--ease-out) both;
+}
+
+/* Só entrada. `translateY` pequeno (6px) e curto de propósito: navegação é a
+   ação mais repetida do site, e qualquer coisa mais longa vira latência. */
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
 }
 
 /* --- skip link -------------------------------------------------------------

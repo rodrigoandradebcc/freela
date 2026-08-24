@@ -20,36 +20,35 @@
  * `imageKey` → `images[key]` acontece aqui, em `resolveImage`.
  */
 
-import type { JSX } from "react";
+import type { JSX } from 'react';
 
-import { images } from "@/assets/images";
-import { ShowCard } from "@/components/agenda/ShowCard";
-import { HeroHome } from "@/components/home/HeroHome";
-import { NextShowBanner } from "@/components/home/NextShowBanner";
-import { DownloadIcon } from "@/components/icons";
-import { NowPlayingCard } from "@/components/music/NowPlayingCard";
-import { TrackList } from "@/components/music/TrackList";
-import { ContactForm } from "@/components/shared/ContactForm";
-import { AppImage } from "@/components/ui/AppImage";
-import { Button } from "@/components/ui/Button";
-import { Reveal } from "@/components/ui/Reveal";
-import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
-import { TexturedPanel } from "@/components/ui/TexturedPanel";
-import { ReelCard } from "@/components/video/ReelCard";
-import { VideoCard } from "@/components/video/VideoCard";
-import { MEDIA_KIT_HOME_CTA_LABEL } from "@/data/mediaKit";
-import { showsPreview } from "@/data/shows";
-import { ABOUT_TEXT, INSTAGRAM_URL, OPENED_FOR } from "@/data/site";
+import { images } from '@/assets/images';
+import { ShowCard } from '@/components/agenda/ShowCard';
+import { HeroHome } from '@/components/home/HeroHome';
+import { NextShowBanner } from '@/components/home/NextShowBanner';
+import { NowPlayingCard } from '@/components/music/NowPlayingCard';
+import { TrackList } from '@/components/music/TrackList';
+import { ContactForm } from '@/components/shared/ContactForm';
+import { AppImage } from '@/components/ui/AppImage';
+import { Button } from '@/components/ui/Button';
+import { Reveal } from '@/components/ui/Reveal';
+import { SectionEyebrow } from '@/components/ui/SectionEyebrow';
+import { TexturedPanel } from '@/components/ui/TexturedPanel';
+import { ReelCard } from '@/components/video/ReelCard';
+import { VideoCard } from '@/components/video/VideoCard';
+import { MEDIA_KIT_HOME_CTA_LABEL } from '@/data/mediaKit';
+import { showsPreview } from '@/data/shows';
+import { ABOUT_TEXT, INSTAGRAM_URL, OPENED_FOR } from '@/data/site';
 import {
   homeReels,
   homeVideoPreviewCaption,
   homeVideoPreviewImageKey,
   homeVideoPreviewTitle,
-} from "@/data/videos";
-import { usePageTitle } from "@/hooks/usePageTitle";
-import type { ImageMeta } from "@/types";
+} from '@/data/videos';
+import { usePageTitle } from '@/hooks/usePageTitle';
+import type { ImageMeta } from '@/types';
 
-import styles from "./HomePage.module.css";
+import styles from './HomePage.module.css';
 
 /** Resolve a `imageKey` de um dado contra o manifesto de imagens. */
 function resolveImage(key: string): ImageMeta {
@@ -57,7 +56,7 @@ function resolveImage(key: string): ImageMeta {
 }
 
 export default function HomePage(): JSX.Element {
-  usePageTitle("Início");
+  usePageTitle('Início');
 
   return (
     <div className={styles.page}>
@@ -95,10 +94,7 @@ export default function HomePage(): JSX.Element {
       </section>
 
       {/* --- música ------------------------------------------------------ */}
-      <section
-        className={styles.section}
-        aria-labelledby="home-repertoire-title"
-      >
+      <section className={styles.section} aria-labelledby="home-repertoire-title">
         <div className={styles.musicGrid}>
           <Reveal>
             <NowPlayingCard variant="home" />
@@ -190,24 +186,19 @@ export default function HomePage(): JSX.Element {
       </section>
 
       {/* --- prévia do mídia kit ------------------------------------------ */}
-      <section
-        className={styles.section}
-        aria-labelledby="home-media-kit-title"
-      >
+      <section className={styles.section} aria-labelledby="home-media-kit-title">
         <div className={styles.mediaKitGrid}>
           <Reveal>
             <TexturedPanel tone="orange" className={styles.mediaKitPanel}>
-              <SectionEyebrow className={styles.panelEyebrow}>
-                PARA CONTRATANTES
-              </SectionEyebrow>
+              <SectionEyebrow className={styles.panelEyebrow}>PARA CONTRATANTES</SectionEyebrow>
 
               <h2 className={styles.panelTitle} id="home-media-kit-title">
                 Mídia kit &amp; contratação
               </h2>
 
               <p className={styles.panelText}>
-                Release, rider técnico, mapa de palco, fotos em alta e logos:
-                tudo em um pacote único, pronto para a sua produção.
+                Release, rider técnico, mapa de palco, fotos em alta e logos: tudo em um pacote
+                único, pronto para a sua produção.
               </p>
 
               {/* Os três botões levam à página Mídia kit, onde ficam os arquivos
@@ -218,7 +209,7 @@ export default function HomePage(): JSX.Element {
                   variant="dark"
                   as="link"
                   to="/midia-kit"
-                  icon={<DownloadIcon />}
+                  className={styles.panelPrimaryButton}
                 >
                   {MEDIA_KIT_HOME_CTA_LABEL}
                 </Button>

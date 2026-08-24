@@ -18,6 +18,12 @@
  * O <main id="main-content"> é responsabilidade DESTE componente: as páginas
  * NÃO devem renderizar outro <main> (dois <main> no mesmo documento é HTML
  * inválido e quebra o alvo do skip link).
+ *
+ * TRANSIÇÃO DE ROTA: só ENTRADA, nunca saída. A página velha some na hora e a
+ * nova entra em 180ms. Animar a saída obrigaria a esperar o conteúdo antigo
+ * desaparecer antes de mostrar o novo — latência pura numa ação que a pessoa
+ * repete o tempo todo. O `key={pathname}` é o que faz a animação rodar a cada
+ * troca; sem ele o <main> não remonta e o `animation` só dispararia uma vez.
  */
 
 import type { JSX, ReactNode } from 'react';
@@ -49,7 +55,7 @@ export function AppLayout({ children }: AppLayoutProps): JSX.Element {
 
       <Header variant={pathname === PRESS_ROUTE ? 'press' : 'default'} />
 
-      <main id="main-content" className={styles.main}>
+      <main id="main-content" className={styles.main} key={pathname}>
         {children}
       </main>
 
